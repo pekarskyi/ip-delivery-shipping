@@ -63,7 +63,7 @@ class Delivery_API {
 		}
 
 		// Застосування фільтра для часу кешування.
-		$this->cache_time = apply_filters( 'delivery_cache_time', $this->cache_time );
+		$this->cache_time = apply_filters( 'ip_delivery_cache_time', $this->cache_time );
 		$this->cache_time = absint( $this->cache_time ); // Переконуємося, що значення ціле та позитивне.
 	}
 	

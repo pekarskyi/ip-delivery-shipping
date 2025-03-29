@@ -183,7 +183,7 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 		}
 		
 		// Дозволяємо фільтрам змінити вартість
-		$cost = apply_filters( 'delivery_calculated_cost', $cost, $package, $this->instance_id );
+		$cost = apply_filters( 'ip_delivery_calculated_cost', $cost, $package, $this->instance_id );
 		
 		// Додаємо метод доставки
 		$rate = array(

@@ -393,6 +393,6 @@ if ( defined( "WP_DEBUG" ) && WP_DEBUG ) {
 	public function on_plugins_loaded() {
 		// Додаткова ініціалізація, яка може знадобитися після завантаження всіх плагінів
 		// Наприклад, перевірка версій або взаємодія з іншими плагінами
-		do_action( 'delivery_plugin_loaded' );
+		do_action( 'ip_delivery_plugin_loaded' );
 	}
 } 

@@ -62,7 +62,7 @@
 
 Плагін надає наступні фільтри для розробників:
 
-### `woocommerce_delivery_calculate_shipping_cost`
+### `ip_delivery_calculated_cost`
 
 Цей фільтр дозволяє модифікувати розрахунок вартості доставки на основі різних параметрів.
 
@@ -80,7 +80,7 @@
 
 ```php
 // Розрахунок вартості на основі ваги товарів
-add_filter('woocommerce_delivery_calculate_shipping_cost', 'custom_delivery_cost_calculation', 10, 2);
+add_filter('ip_delivery_calculated_cost', 'custom_delivery_cost_calculation', 10, 2);
 function custom_delivery_cost_calculation($cost, $data) {
     $package = $data['package'];
     $total_weight = 0;
@@ -105,7 +105,7 @@ function custom_delivery_cost_calculation($cost, $data) {
 
 ```php
 // Розрахунок вартості на основі обраного міста
-add_filter('woocommerce_delivery_calculate_shipping_cost', 'city_based_delivery_cost', 10, 2);
+add_filter('ip_delivery_calculated_cost', 'city_based_delivery_cost', 10, 2);
 function city_based_delivery_cost($cost, $data) {
     // Додаткова вартість для конкретних міст
     $city_costs = array(
@@ -127,7 +127,7 @@ function city_based_delivery_cost($cost, $data) {
 
 ```php
 // Безкоштовна доставка при замовленні від 1000 грн
-add_filter('woocommerce_delivery_calculate_shipping_cost', 'free_delivery_for_expensive_orders', 10, 2);
+add_filter('ip_delivery_calculated_cost', 'free_delivery_for_expensive_orders', 10, 2);
 function free_delivery_for_expensive_orders($cost, $data) {
     $cart_subtotal = WC()->cart->get_subtotal();
     
@@ -139,7 +139,7 @@ function free_delivery_for_expensive_orders($cost, $data) {
 }
 ```
 
-### `delivery_cache_time`
+### `ip_delivery_cache_time`
 
 Цей фільтр дозволяє змінити час кешування відповідей API (в секундах).
 
@@ -150,7 +150,7 @@ function free_delivery_for_expensive_orders($cost, $data) {
 
 ```php
 // Змінюємо час кешування на 3 години
-add_filter('delivery_cache_time', 'modify_delivery_cache_time');
+add_filter('ip_delivery_cache_time', 'modify_delivery_cache_time');
 function modify_delivery_cache_time($time) {
     return 3 * 3600; // 3 години в секундах
 }
