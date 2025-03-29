@@ -1,0 +1,195 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Delivery for WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-27 21:19+0000\n"
+"PO-Revision-Date: 2025-03-27 21:36+0000\n"
+"Last-Translator: \n"
+"Language-Team: Українська\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Domain: ip-delivery-shipping"
+
+#: delivery.php:96
+msgid "API Public Key"
+msgstr "Публічний ключ API"
+
+#: delivery.php:103
+msgid "API Secret Key"
+msgstr "Секретний ключ API"
+
+#: delivery.php:85
+msgid "Base Cost"
+msgstr "Базова вартість доставки"
+
+#: delivery.php:87
+msgid "Base cost for delivery. Can be modified by filters."
+msgstr "Базова вартість доставки. Може бути змінена фільтрами."
+
+#: delivery.php:119
+msgid "Cache Options"
+msgstr "Параметри кешу"
+
+#: delivery.php:626 delivery.php:644
+msgid "City"
+msgstr "Місто"
+
+#: delivery.php:571
+msgid "City ID not specified"
+msgstr "Ідентифікатор міста не вказано"
+
+#: delivery.php:122
+msgid "Clear Cache"
+msgstr "Очистити кеш"
+
+#: delivery.php:757
+msgid "Delivery API cache has been cleared successfully."
+msgstr "Кеш API Delivery успішно очищено."
+
+#. Name of the plugin
+msgid "Delivery for WooCommerce"
+msgstr "Delivery для WooCommerce"
+
+#: delivery.php:32 delivery.php:42 delivery.php:81
+msgid "Delivery Service"
+msgstr "Доставка Delivery"
+
+#: delivery.php:672
+msgid "Delivery Shipping"
+msgstr "Доставка Delivery"
+
+#: delivery.php:33
+msgid "Delivery shipping method"
+msgstr "Доставка Delivery"
+
+#: delivery.php:629 delivery.php:648
+msgid "Delivery Warehouse"
+msgstr "Склад доставки"
+
+#: delivery.php:71
+msgid "Enable"
+msgstr "Увімкнути"
+
+#: delivery.php:73
+msgid "Enable this shipping method."
+msgstr "Увімкніть цей спосіб доставки."
+
+#: delivery.php:400
+msgid "Error loading regions. Check plugin settings and API keys."
+msgstr ""
+"Помилка завантаження регіонів. Перевірте налаштування плагіна та ключі API."
+
+#: delivery.php:562
+msgid "Failed to get cities list"
+msgstr "Не вдалося отримати список міст"
+
+#: delivery.php:540
+msgid "Failed to get regions list. Check API keys."
+msgstr "Не вдалося отримати список регіонів. Перевірте ключі API."
+
+#: delivery.php:584
+msgid "Failed to get warehouses list"
+msgstr "Не вдалося отримати список складів"
+
+#: delivery.php:110
+msgid "Get API Keys"
+msgstr "Отримати ключі API"
+
+#. Author URI of the plugin
+msgid "https://inwebpress.com"
+msgstr "https://inwebpress.com"
+
+#: delivery.php:397
+msgid "Invalid regions data format. Check plugin settings."
+msgstr "Неправильний формат даних про регіони. Перевірте налаштування плагіна."
+
+#. Author of the plugin
+msgid "InwebPress"
+msgstr "InwebPress"
+
+#: delivery.php:394
+msgid "No regions found. Check plugin settings."
+msgstr "Регіони не знайдено. Перевірте налаштування плагіна."
+
+#: delivery.php:509 delivery.php:610
+msgid "Please select a city for Delivery shipping"
+msgstr "Будь ласка, оберіть місто для доставки"
+
+#: delivery.php:503 delivery.php:606
+msgid "Please select a region for Delivery shipping"
+msgstr "Будь ласка, оберіть регіон для доставки"
+
+#: delivery.php:515 delivery.php:614
+msgid "Please select a warehouse for Delivery shipping"
+msgstr "Будь ласка, оберіть склад для доставки"
+
+#: delivery.php:98
+msgid "Public key for Delivery API access"
+msgstr "Відкритий ключ для доступу до Delivery API"
+
+#: delivery.php:623 delivery.php:640
+msgid "Region"
+msgstr "Регіон"
+
+#: delivery.php:549
+msgid "Region ID not specified"
+msgstr "Ідентифікатор регіону не вказано"
+
+#: delivery.php:105
+msgid "Secret key for Delivery API access"
+msgstr "Секретний ключ для доступу до Delivery API"
+
+#: delivery.php:426 delivery.php:689 delivery.php:690 delivery.php:693
+msgid "Select City"
+msgstr "Виберіть місто"
+
+#: delivery.php:364 delivery.php:677 delivery.php:678 delivery.php:681
+msgid "Select Region"
+msgstr "Виберіть регіон"
+
+#: delivery.php:465 delivery.php:700 delivery.php:701 delivery.php:704
+msgid "Select Warehouse"
+msgstr "Виберіть cклад"
+
+#: delivery.php:404
+msgid "Server connection error when loading regions."
+msgstr "Помилка з'єднання з сервером при завантаженні регіонів."
+
+#: delivery.php:715
+msgid "Settings"
+msgstr "Налаштування"
+
+#: delivery.php:121
+msgid ""
+"The plugin caches API responses for better performance. Cache lifetime: 24 "
+"hours."
+msgstr ""
+"Плагін кешує відповіді API для кращої продуктивності. Час життя кешу: 24 "
+"години."
+
+#: delivery.php:78
+msgid "Title"
+msgstr "Заголовок"
+
+#: delivery.php:80
+msgid "Title to display on site"
+msgstr "Заголовок для відображення на сайті"
+
+#: delivery.php:113
+#, php-format
+msgid ""
+"To get API keys, please visit <a href=\"%s\" target=\"_blank\">Delivery API "
+"Key page</a>"
+msgstr ""
+"Щоб отримати ключі API, відвідайте <a href=\"%s\" target=\"_blank\">сторінку "
+"Ключі API доставки</a>"
+
+#. Description of the plugin
+msgid "Ukrainian delivery service \"Delivery\" for WooCommerce"
+msgstr "Українська служба доставки \"Delivery\" для WooCommerce"
