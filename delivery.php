@@ -2,15 +2,15 @@
 /**
  * Plugin Name: Delivery for WooCommerce
  * Description: Ukrainian delivery service "Delivery" for WooCommerce
- * Version: 1.0.0
+ * Version: 1.1.0
+ * Plugin URI: https://github.com/pekarskyi/ip-delivery-shipping
  * Author: InwebPress
  * Plugin URI: https://github.com/pekarskyi/ip-delivery-shipping
  * Author URI: https://inwebpress.com
  * Text Domain: ip-delivery-shipping
- * License URI: license.txt
  * Requires PHP: 7.4
- * Tested up to: 9.6.0
- * WC tested up to: 6.7.2
+ * Tested up to: 6.7.2
+ * WC tested up to: 9.6.0
  * Domain Path: /lang
  * WC requires at least: 3.0
  * WooCommerce: true
@@ -43,4 +43,16 @@ function Delivery() {
 }
 
 // Global for backwards compatibility.
-$GLOBALS['delivery'] = Delivery(); 
+$GLOBALS['delivery'] = Delivery();
+
+// Adding update check via GitHub
+require_once plugin_dir_path( __FILE__ ) . 'updates/github-updater.php';
+if ( function_exists( 'ip_delivery_shipping_github_updater_init' ) ) {
+    ip_delivery_shipping_github_updater_init(
+        __FILE__,       // Plugin file path
+        'pekarskyi',     // Your GitHub username
+        '',              // Access token (empty)
+        'ip-delivery-shipping' // Repository name (optional)
+        // Other parameters are determined automatically
+    );
+}
