@@ -1,4 +1,4 @@
-# Delivery для WooCommerce
+# Делівері для WooCommerce
 
 Плагін інтеграції української служби доставки "Делівері" для WooCommerce.
 
