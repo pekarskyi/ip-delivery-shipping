@@ -26,9 +26,6 @@ class Delivery_Ajax_Handler {
 		
 		add_action( 'wp_ajax_delivery_get_warehouses', array( $this, 'get_warehouses_callback' ) );
 		add_action( 'wp_ajax_nopriv_delivery_get_warehouses', array( $this, 'get_warehouses_callback' ) );
-		
-		// Додаємо обробник для очищення кешу (тільки для адміністраторів)
-		add_action( 'wp_ajax_delivery_clear_cache', array( $this, 'clear_cache_callback' ) );
 	}
 
 	/**
@@ -108,43 +105,5 @@ class Delivery_Ajax_Handler {
 			wp_send_json_error( __( 'Failed to get warehouses list', 'ip-delivery-shipping' ) );
 		}
 		wp_die();
-	}
-
-	/**
-	 * Clear cache callback.
-	 */
-	public function clear_cache_callback() {
-		// Перевіряємо nonce для безпеки
-		check_ajax_referer( 'delivery_clear_cache', 'security' );
-		
-		// Перевіряємо права користувача
-		if ( ! current_user_can( 'manage_woocommerce' ) ) {
-			if ( isset( $_REQUEST['is_ajax'] ) && $_REQUEST['is_ajax'] === '0' ) {
-				wp_die( __( 'You do not have sufficient permissions to perform this action.', 'ip-delivery-shipping' ) );
-			} else {
-				wp_send_json_error( __( 'You do not have sufficient permissions to perform this action.', 'ip-delivery-shipping' ) );
-			}
-		}
-		
-		global $wpdb;
-		
-		// Видаляємо весь кеш, пов'язаний з Delivery
-		$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_ip_delivery_%'" );
-		$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_ip_delivery_%'" );
-		
-		if ( isset( $_REQUEST['is_ajax'] ) && $_REQUEST['is_ajax'] === '0' ) {
-			// Якщо це не AJAX запит, перенаправляємо назад
-			// Повідомлення про успіх буде виведено на сторінці налаштувань через параметр delivery_cache_cleared
-			wp_safe_redirect( add_query_arg( 
-				array( 
-					'delivery_cache_cleared' => 'yes'
-				), 
-				admin_url( 'admin.php?page=wc-settings&tab=shipping&section=ip_delivery' ) 
-			) );
-			exit;
-		} else {
-			// Для AJAX-запитів просто повертаємо статус успіху без повідомлення
-			wp_send_json_success();
-		}
 	}
 } 

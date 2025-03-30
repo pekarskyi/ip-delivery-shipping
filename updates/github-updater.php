@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 // Встановлюємо унікальний префікс плагіну (змініть це для кожного плагіну)
-$prefix = 'ip_delivery_shipping';
+$prefix = 'IP_WOO_CLEANER';
 
 // Перетворення префікса у різні формати
 $prefix_upper = strtoupper($prefix);                      // IP_WOO_CLEANER

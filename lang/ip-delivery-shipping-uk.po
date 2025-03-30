@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Delivery for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-27 21:19+0000\n"
-"PO-Revision-Date: 2025-03-29 16:48+0000\n"
+"PO-Revision-Date: 2025-03-27 21:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: Українська\n"
 "Language: uk\n"
@@ -16,120 +16,96 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: ip-delivery-shipping"
 
-#: includes/class-shipping-method.php:138
-#, php-format
-msgid ""
-"API keys and other settings can be configured in <a href=\"%s\"><strong>"
-"global settings</strong></a> of the delivery method."
-msgstr ""
-"Ключі API та інші параметри можна налаштувати в <a href=\"%s\"><strong>"
-"глобальних налаштуваннях</strong></a> методу доставки."
+#: delivery.php:96
+msgid "API Public Key"
+msgstr "Публічний ключ API"
 
-#: includes/class-shipping-method.php:134
-msgid "API Settings Information"
-msgstr "Інформація про налаштування API"
+#: delivery.php:103
+msgid "API Secret Key"
+msgstr "Секретний ключ API"
 
-#: includes/class-shipping-method.php:126
+#: delivery.php:85
 msgid "Base Cost"
 msgstr "Базова вартість доставки"
 
-#: includes/class-shipping-method.php:128
-msgid ""
-"Basic cost of delivery for this zone. Will be added to the calculated cost."
-msgstr ""
-"Базова вартість доставки для цієї зони. Буде додана до розрахованої вартості."
+#: delivery.php:87
+msgid "Base cost for delivery. Can be modified by filters."
+msgstr "Базова вартість доставки. Може бути змінена фільтрами."
 
-#: includes/class-shipping-method.php:88
-msgid "Cache Time (hours)"
-msgstr "Час життя кешу (години)"
+#: delivery.php:119
+msgid "Cache Options"
+msgstr "Параметри кешу"
 
-#: includes/class-checkout.php:323 includes/class-checkout.php:347
-#: includes/class-checkout.php:496 templates/checkout-fields.php:28
+#: delivery.php:626 delivery.php:644
 msgid "City"
 msgstr "Місто"
 
-#: includes/class-ajax-handler.php:95
+#: delivery.php:571
 msgid "City ID not specified"
 msgstr "Ідентифікатор міста не вказано"
 
-#: includes/class-shipping-method.php:111
+#: delivery.php:122
 msgid "Clear Cache"
 msgstr "Очистити кеш"
 
-#: includes/class-shipping-method.php:112
-msgid "Clear the Delivery API cache"
-msgstr "Очистити кеш API Делівері"
-
-#: includes/class-plugin.php:72
-msgid "Cloning is forbidden."
-msgstr "Клонування заборонено."
-
-#: includes/class-shipping-method.php:101
-msgid "Data Cleanup"
-msgstr "Очищення даних"
-
-#: includes/class-shipping-method.php:103
-msgid "Delete all plugin data when it is removed"
-msgstr "Видалити всі дані плагіна після його видалення"
-
-#: includes/class-admin.php:49
+#: delivery.php:757
 msgid "Delivery API cache has been cleared successfully."
-msgstr "Кеш API Делівері успішно очищено."
-
-#: includes/class-ajax-handler.php:40 includes/class-ajax-handler.php:61
-#: includes/class-ajax-handler.php:90
-msgid "Delivery API class not found."
-msgstr "Клас API доставки не знайдено."
+msgstr "Кеш API Delivery успішно очищено."
 
 #. Name of the plugin
 msgid "Delivery for WooCommerce"
-msgstr "Делівері для WooCommerce"
+msgstr "Delivery для WooCommerce"
 
-#: includes/class-checkout.php:479 includes/class-shipping-method.php:26
-#: includes/class-shipping-method.php:44 includes/class-shipping-method.php:47
-#: includes/class-shipping-method.php:122
-#: includes/class-shipping-method.php:248 templates/checkout-fields.php:14
+#: delivery.php:32 delivery.php:42 delivery.php:81
 msgid "Delivery Service"
-msgstr "Доставка Делівері"
+msgstr "Доставка Delivery"
 
-#: includes/class-checkout.php:326 includes/class-checkout.php:351
+#: delivery.php:672
+msgid "Delivery Shipping"
+msgstr "Доставка Delivery"
+
+#: delivery.php:33
+msgid "Delivery shipping method"
+msgstr "Доставка Delivery"
+
+#: delivery.php:629 delivery.php:648
 msgid "Delivery Warehouse"
 msgstr "Склад доставки"
 
-#: includes/class-checkout.php:149
+#: delivery.php:71
+msgid "Enable"
+msgstr "Увімкнути"
+
+#: delivery.php:73
+msgid "Enable this shipping method."
+msgstr "Увімкніть цей спосіб доставки."
+
+#: delivery.php:400
 msgid "Error loading regions. Check plugin settings and API keys."
 msgstr ""
 "Помилка завантаження регіонів. Перевірте налаштування плагіна та ключі API."
 
-#: includes/class-ajax-handler.php:79
+#: delivery.php:562
 msgid "Failed to get cities list"
 msgstr "Не вдалося отримати список міст"
 
-#: includes/class-ajax-handler.php:50
+#: delivery.php:540
 msgid "Failed to get regions list. Check API keys."
 msgstr "Не вдалося отримати список регіонів. Перевірте ключі API."
 
-#: includes/class-ajax-handler.php:108
+#: delivery.php:584
 msgid "Failed to get warehouses list"
 msgstr "Не вдалося отримати список складів"
 
-#. URI of the plugin
-msgid "https://github.com/pekarskyi/ip-delivery-shipping"
-msgstr "https://github.com/pekarskyi/ip-delivery-shipping"
+#: delivery.php:110
+msgid "Get API Keys"
+msgstr "Отримати ключі API"
 
 #. Author URI of the plugin
 msgid "https://inwebpress.com"
 msgstr "https://inwebpress.com"
 
-#: includes/class-shipping-method.php:105
-msgid ""
-"If checked, all plugin settings, cached data, and configurations will be "
-"deleted from the database when the plugin is removed."
-msgstr ""
-"Всі налаштування плагіна, кешовані дані та конфігурації будуть видалені з "
-"бази даних, коли плагін буде видалено."
-
-#: includes/class-checkout.php:146
+#: delivery.php:397
 msgid "Invalid regions data format. Check plugin settings."
 msgstr "Неправильний формат даних про регіони. Перевірте налаштування плагіна."
 
@@ -137,102 +113,83 @@ msgstr "Неправильний формат даних про регіони. 
 msgid "InwebPress"
 msgstr "InwebPress"
 
-#. %s: WooCommerce link
-#: includes/class-plugin.php:245
-#, php-format
-msgid "IP Delivery Shipping requires %s to be installed and active."
-msgstr ""
-"Плагін IP Delivery Shipping вимагає, щоб %s було встановлено та активовано."
-
-#: includes/class-checkout.php:143
+#: delivery.php:394
 msgid "No regions found. Check plugin settings."
 msgstr "Регіони не знайдено. Перевірте налаштування плагіна."
 
-#: includes/class-checkout.php:266 includes/class-checkout.php:305
+#: delivery.php:509 delivery.php:610
 msgid "Please select a city for Delivery shipping"
-msgstr "Будь ласка, оберіть місто"
+msgstr "Будь ласка, оберіть місто для доставки"
 
-#: includes/class-checkout.php:260 includes/class-checkout.php:301
+#: delivery.php:503 delivery.php:606
 msgid "Please select a region for Delivery shipping"
-msgstr "Будь ласка, оберіть регіон"
+msgstr "Будь ласка, оберіть регіон для доставки"
 
-#: includes/class-checkout.php:272 includes/class-checkout.php:309
+#: delivery.php:515 delivery.php:614
 msgid "Please select a warehouse for Delivery shipping"
-msgstr "Будь ласка, оберіть склад"
+msgstr "Будь ласка, оберіть склад для доставки"
 
-#: includes/class-shipping-method.php:74
-msgid "Public API Key"
-msgstr "Публічний ключ API"
+#: delivery.php:98
+msgid "Public key for Delivery API access"
+msgstr "Відкритий ключ для доступу до Delivery API"
 
-#: includes/class-checkout.php:320 includes/class-checkout.php:343
-#: includes/class-checkout.php:482 templates/checkout-fields.php:17
+#: delivery.php:623 delivery.php:640
 msgid "Region"
 msgstr "Регіон"
 
-#: includes/class-ajax-handler.php:66
+#: delivery.php:549
 msgid "Region ID not specified"
 msgstr "Ідентифікатор регіону не вказано"
 
-#: includes/class-shipping-method.php:81
-msgid "Secret API Key"
-msgstr "Секретний ключ API"
+#: delivery.php:105
+msgid "Secret key for Delivery API access"
+msgstr "Секретний ключ для доступу до Delivery API"
 
-#: includes/class-checkout.php:175 includes/class-checkout.php:412
-#: includes/class-checkout.php:498
+#: delivery.php:426 delivery.php:689 delivery.php:690 delivery.php:693
 msgid "Select City"
 msgstr "Виберіть місто"
 
-#: includes/class-checkout.php:113 includes/class-checkout.php:411
-#: includes/class-checkout.php:484
+#: delivery.php:364 delivery.php:677 delivery.php:678 delivery.php:681
 msgid "Select Region"
 msgstr "Виберіть регіон"
 
-#: includes/class-checkout.php:214 includes/class-checkout.php:413
-#: includes/class-checkout.php:505
+#: delivery.php:465 delivery.php:700 delivery.php:701 delivery.php:704
 msgid "Select Warehouse"
 msgstr "Виберіть cклад"
 
-#: includes/class-checkout.php:153
+#: delivery.php:404
 msgid "Server connection error when loading regions."
 msgstr "Помилка з'єднання з сервером при завантаженні регіонів."
 
-#: includes/class-admin.php:36
+#: delivery.php:715
 msgid "Settings"
 msgstr "Налаштування"
 
-#: includes/class-shipping-method.php:121
-msgid "This controls the title which the user sees during checkout."
+#: delivery.php:121
+msgid ""
+"The plugin caches API responses for better performance. Cache lifetime: 24 "
+"hours."
 msgstr ""
-"Це керує заголовком, який користувач бачить під час оформлення замовлення."
+"Плагін кешує відповіді API для кращої продуктивності. Час життя кешу: 24 "
+"години."
 
-#: includes/class-shipping-method.php:90
-msgid "Time to cache API responses (in hours). Minimum 1 hour."
-msgstr "Час кешування відповідей API (у годинах). Мінімум 1 година."
-
-#: includes/class-shipping-method.php:119
+#: delivery.php:78
 msgid "Title"
 msgstr "Заголовок"
 
+#: delivery.php:80
+msgid "Title to display on site"
+msgstr "Заголовок для відображення на сайті"
+
+#: delivery.php:113
+#, php-format
+msgid ""
+"To get API keys, please visit <a href=\"%s\" target=\"_blank\">Delivery API "
+"Key page</a>"
+msgstr ""
+"Щоб отримати ключі API, відвідайте <a href=\"%s\" target=\"_blank\">сторінку "
+"Ключі API доставки</a>"
+
 #. Description of the plugin
 msgid "Ukrainian delivery service \"Delivery\" for WooCommerce"
-msgstr "Українська служба доставки \"Делівері\" для WooCommerce"
-
-#: includes/class-plugin.php:79
-msgid "Unserializing instances of this class is forbidden."
-msgstr "Розсеріалізація екземплярів цього класу заборонена."
-
-#: includes/class-checkout.php:503 templates/checkout-fields.php:39
-msgid "Warehouse"
-msgstr "Склад"
-
-#: includes/class-ajax-handler.php:123 includes/class-ajax-handler.php:125
-msgid "You do not have sufficient permissions to perform this action."
-msgstr "Ви не маєте достатніх прав для виконання цієї дії."
-
-#: includes/class-shipping-method.php:76
-msgid "Your public API key for Delivery Service API."
-msgstr "Ваш публічний ключ API"
-
-#: includes/class-shipping-method.php:83
-msgid "Your secret API key for Delivery Service API."
-msgstr "Ваш секретний ключ API"
+msgstr "Українська служба доставки \"Delivery\" для WooCommerce"

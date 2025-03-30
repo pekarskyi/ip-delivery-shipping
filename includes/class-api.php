@@ -45,63 +45,13 @@ class Delivery_API {
 	 * Constructor.
 	 */
 	public function __construct() {
-		// Отримуємо налаштування із глобальних налаштувань методу доставки
-		$settings = $this->get_global_settings();
-		
+		$settings = get_option( 'woocommerce_delivery_settings' );
 		$this->public_key = isset( $settings['public_key'] ) ? sanitize_text_field( $settings['public_key'] ) : '';
 		$this->secret_key = isset( $settings['secret_key'] ) ? sanitize_text_field( $settings['secret_key'] ) : '';
 
-		// Отримуємо час кешування з налаштувань
-		if ( isset( $settings['cache_time'] ) && is_numeric( $settings['cache_time'] ) ) {
-			$cache_time_hours = floatval( $settings['cache_time'] );
-			$this->cache_time = $cache_time_hours * 3600; // Конвертуємо години в секунди
-		}
-
-		// Перевіряємо, що час кешування не менше 1 години
-		if ( $this->cache_time < 3600 ) {
-			$this->cache_time = 3600; // Мінімум 1 година
-		}
-
 		// Застосування фільтра для часу кешування.
-		$this->cache_time = apply_filters( 'ip_delivery_cache_time', $this->cache_time );
+		$this->cache_time = apply_filters( 'delivery_cache_time', $this->cache_time );
 		$this->cache_time = absint( $this->cache_time ); // Переконуємося, що значення ціле та позитивне.
-	}
-	
-	/**
-	 * Get global settings from the shipping method.
-	 * 
-	 * @return array
-	 */
-	protected function get_global_settings() {
-		$settings = array();
-		
-		// Отримуємо налаштування з глобального методу доставки
-		$global_settings = get_option( 'woocommerce_ip_delivery_settings', array() );
-		
-		if ( ! empty( $global_settings ) && 
-			isset( $global_settings['public_key'] ) && ! empty( $global_settings['public_key'] ) &&
-			isset( $global_settings['secret_key'] ) && ! empty( $global_settings['secret_key'] ) ) {
-			
-			return $global_settings;
-		}
-		
-		// Якщо глобальні налаштування відсутні, шукаємо в зонах доставки
-		global $wpdb;
-		$delivery_settings = $wpdb->get_results( 
-			"SELECT option_name, option_value FROM $wpdb->options WHERE option_name LIKE 'woocommerce_ip_delivery_%_settings'", 
-			ARRAY_A 
-		);
-		
-		// Перебираємо всі знайдені налаштування
-		foreach ( $delivery_settings as $setting ) {
-			$value = maybe_unserialize( $setting['option_value'] );
-			if ( is_array( $value ) && isset( $value['public_key'] ) && ! empty( $value['public_key'] ) &&
-				isset( $value['secret_key'] ) && ! empty( $value['secret_key'] ) ) {
-				return $value;
-			}
-		}
-		
-		return $settings;
 	}
 
 	/**
@@ -111,7 +61,7 @@ class Delivery_API {
 	 */
 	public function get_areas() {
 		// Try to get from cache first.
-		$cache_key = 'ip_delivery_regions_' . $this->culture;
+		$cache_key = 'delivery_regions_' . $this->culture;
 		$cached_data = get_transient( $cache_key );
 
 		if ( false !== $cached_data ) {
@@ -142,7 +92,7 @@ class Delivery_API {
 	 */
 	public function get_cities( $area_id ) {
 		// Try to get from cache first.
-		$cache_key = 'ip_delivery_cities_' . $this->culture . '_' . $area_id;
+		$cache_key = 'delivery_cities_' . $this->culture . '_' . $area_id;
 		$cached_data = get_transient( $cache_key );
 
 		if ( false !== $cached_data ) {
@@ -174,7 +124,7 @@ class Delivery_API {
 	 */
 	public function get_warehouses( $city_id ) {
 		// Try to get from cache first.
-		$cache_key = 'ip_delivery_warehouses_' . $this->culture . '_' . $city_id;
+		$cache_key = 'delivery_warehouses_' . $this->culture . '_' . $city_id;
 		$cached_data = get_transient( $cache_key );
 
 		if ( false !== $cached_data ) {

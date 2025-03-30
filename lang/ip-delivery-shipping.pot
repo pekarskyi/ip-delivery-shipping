@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Delivery for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-29 16:42+0000\n"
+"POT-Creation-Date: 2025-03-27 21:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,114 +16,95 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: ip-delivery-shipping"
 
-#: includes/class-shipping-method.php:138
-#, php-format
-msgid ""
-"API keys and other settings can be configured in <a href=\"%s\"><strong>"
-"global settings</strong></a> of the delivery method."
+#: delivery.php:96
+msgid "API Public Key"
 msgstr ""
 
-#: includes/class-shipping-method.php:134
-msgid "API Settings Information"
+#: delivery.php:103
+msgid "API Secret Key"
 msgstr ""
 
-#: includes/class-shipping-method.php:126
+#: delivery.php:85
 msgid "Base Cost"
 msgstr ""
 
-#: includes/class-shipping-method.php:128
-msgid ""
-"Basic cost of delivery for this zone. Will be added to the calculated cost."
+#: delivery.php:87
+msgid "Base cost for delivery. Can be modified by filters."
 msgstr ""
 
-#: includes/class-shipping-method.php:88
-msgid "Cache Time (hours)"
+#: delivery.php:119
+msgid "Cache Options"
 msgstr ""
 
-#: includes/class-checkout.php:323 includes/class-checkout.php:347
-#: includes/class-checkout.php:496 templates/checkout-fields.php:28
+#: delivery.php:626 delivery.php:644
 msgid "City"
 msgstr ""
 
-#: includes/class-ajax-handler.php:95
+#: delivery.php:571
 msgid "City ID not specified"
 msgstr ""
 
-#: includes/class-shipping-method.php:111
+#: delivery.php:122
 msgid "Clear Cache"
 msgstr ""
 
-#: includes/class-shipping-method.php:112
-msgid "Clear the Delivery API cache"
-msgstr ""
-
-#: includes/class-plugin.php:72
-msgid "Cloning is forbidden."
-msgstr ""
-
-#: includes/class-shipping-method.php:101
-msgid "Data Cleanup"
-msgstr ""
-
-#: includes/class-shipping-method.php:103
-msgid "Delete all plugin data when it is removed"
-msgstr ""
-
-#: includes/class-admin.php:49
+#: delivery.php:757
 msgid "Delivery API cache has been cleared successfully."
-msgstr ""
-
-#: includes/class-ajax-handler.php:40 includes/class-ajax-handler.php:61
-#: includes/class-ajax-handler.php:90
-msgid "Delivery API class not found."
 msgstr ""
 
 #. Name of the plugin
 msgid "Delivery for WooCommerce"
 msgstr ""
 
-#: includes/class-checkout.php:479 includes/class-shipping-method.php:26
-#: includes/class-shipping-method.php:44 includes/class-shipping-method.php:47
-#: includes/class-shipping-method.php:122
-#: includes/class-shipping-method.php:248 templates/checkout-fields.php:14
+#: delivery.php:32 delivery.php:42 delivery.php:81
 msgid "Delivery Service"
 msgstr ""
 
-#: includes/class-checkout.php:326 includes/class-checkout.php:351
+#: delivery.php:672
+msgid "Delivery Shipping"
+msgstr ""
+
+#: delivery.php:33
+msgid "Delivery shipping method"
+msgstr ""
+
+#: delivery.php:629 delivery.php:648
 msgid "Delivery Warehouse"
 msgstr ""
 
-#: includes/class-checkout.php:149
+#: delivery.php:71
+msgid "Enable"
+msgstr ""
+
+#: delivery.php:73
+msgid "Enable this shipping method."
+msgstr ""
+
+#: delivery.php:400
 msgid "Error loading regions. Check plugin settings and API keys."
 msgstr ""
 
-#: includes/class-ajax-handler.php:79
+#: delivery.php:562
 msgid "Failed to get cities list"
 msgstr ""
 
-#: includes/class-ajax-handler.php:50
+#: delivery.php:540
 msgid "Failed to get regions list. Check API keys."
 msgstr ""
 
-#: includes/class-ajax-handler.php:108
+#: delivery.php:584
 msgid "Failed to get warehouses list"
 msgstr ""
 
-#. URI of the plugin
-msgid "https://github.com/pekarskyi/ip-delivery-shipping"
+#: delivery.php:110
+msgid "Get API Keys"
 msgstr ""
 
 #. Author URI of the plugin
 msgid "https://inwebpress.com"
 msgstr ""
 
-#: includes/class-shipping-method.php:105
-msgid ""
-"If checked, all plugin settings, cached data, and configurations will be "
-"deleted from the database when the plugin is removed."
-msgstr ""
-
-#: includes/class-checkout.php:146
+#: delivery.php:397
 msgid "Invalid regions data format. Check plugin settings."
 msgstr ""
 
@@ -131,100 +112,79 @@ msgstr ""
 msgid "InwebPress"
 msgstr ""
 
-#. %s: WooCommerce link
-#: includes/class-plugin.php:245
-#, php-format
-msgid "IP Delivery Shipping requires %s to be installed and active."
-msgstr ""
-
-#: includes/class-checkout.php:143
+#: delivery.php:394
 msgid "No regions found. Check plugin settings."
 msgstr ""
 
-#: includes/class-checkout.php:266 includes/class-checkout.php:305
+#: delivery.php:509 delivery.php:610
 msgid "Please select a city for Delivery shipping"
 msgstr ""
 
-#: includes/class-checkout.php:260 includes/class-checkout.php:301
+#: delivery.php:503 delivery.php:606
 msgid "Please select a region for Delivery shipping"
 msgstr ""
 
-#: includes/class-checkout.php:272 includes/class-checkout.php:309
+#: delivery.php:515 delivery.php:614
 msgid "Please select a warehouse for Delivery shipping"
 msgstr ""
 
-#: includes/class-shipping-method.php:74
-msgid "Public API Key"
+#: delivery.php:98
+msgid "Public key for Delivery API access"
 msgstr ""
 
-#: includes/class-checkout.php:320 includes/class-checkout.php:343
-#: includes/class-checkout.php:482 templates/checkout-fields.php:17
+#: delivery.php:623 delivery.php:640
 msgid "Region"
 msgstr ""
 
-#: includes/class-ajax-handler.php:66
+#: delivery.php:549
 msgid "Region ID not specified"
 msgstr ""
 
-#: includes/class-shipping-method.php:81
-msgid "Secret API Key"
+#: delivery.php:105
+msgid "Secret key for Delivery API access"
 msgstr ""
 
-#: includes/class-checkout.php:175 includes/class-checkout.php:412
-#: includes/class-checkout.php:498
+#: delivery.php:426 delivery.php:689 delivery.php:690 delivery.php:693
 msgid "Select City"
 msgstr ""
 
-#: includes/class-checkout.php:113 includes/class-checkout.php:411
-#: includes/class-checkout.php:484
+#: delivery.php:364 delivery.php:677 delivery.php:678 delivery.php:681
 msgid "Select Region"
 msgstr ""
 
-#: includes/class-checkout.php:214 includes/class-checkout.php:413
-#: includes/class-checkout.php:505
+#: delivery.php:465 delivery.php:700 delivery.php:701 delivery.php:704
 msgid "Select Warehouse"
 msgstr ""
 
-#: includes/class-checkout.php:153
+#: delivery.php:404
 msgid "Server connection error when loading regions."
 msgstr ""
 
-#: includes/class-admin.php:36
+#: delivery.php:715
 msgid "Settings"
 msgstr ""
 
-#: includes/class-shipping-method.php:121
-msgid "This controls the title which the user sees during checkout."
+#: delivery.php:121
+msgid ""
+"The plugin caches API responses for better performance. Cache lifetime: 24 "
+"hours."
 msgstr ""
 
-#: includes/class-shipping-method.php:90
-msgid "Time to cache API responses (in hours). Minimum 1 hour."
-msgstr ""
-
-#: includes/class-shipping-method.php:119
+#: delivery.php:78
 msgid "Title"
+msgstr ""
+
+#: delivery.php:80
+msgid "Title to display on site"
+msgstr ""
+
+#: delivery.php:113
+#, php-format
+msgid ""
+"To get API keys, please visit <a href=\"%s\" target=\"_blank\">Delivery API "
+"Key page</a>"
 msgstr ""
 
 #. Description of the plugin
 msgid "Ukrainian delivery service \"Delivery\" for WooCommerce"
-msgstr ""
-
-#: includes/class-plugin.php:79
-msgid "Unserializing instances of this class is forbidden."
-msgstr ""
-
-#: includes/class-checkout.php:503 templates/checkout-fields.php:39
-msgid "Warehouse"
-msgstr ""
-
-#: includes/class-ajax-handler.php:123 includes/class-ajax-handler.php:125
-msgid "You do not have sufficient permissions to perform this action."
-msgstr ""
-
-#: includes/class-shipping-method.php:76
-msgid "Your public API key for Delivery Service API."
-msgstr ""
-
-#: includes/class-shipping-method.php:83
-msgid "Your secret API key for Delivery Service API."
 msgstr ""
