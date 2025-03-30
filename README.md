@@ -4,6 +4,8 @@
 
 Плагін інтеграції служби доставки "Делівері" з WooCommerce для інтернет-магазинів в Україні.
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/pekarskyi/ip-delivery-shipping?style=for-the-badge)](https://github.com/pekarskyi/ip-delivery-shipping/releases/)
+
 ## Опис
 
 Плагін додає метод доставки "Доставка Делівері" в WooCommerce, що дозволяє покупцям вибирати відділення компанії "Делівері" при оформленні замовлення. Плагін інтегрується з API "Делівері" для отримання актуальної інформації про доступні регіони, міста та відділення.
