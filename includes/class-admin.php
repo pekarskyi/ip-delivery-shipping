@@ -23,6 +23,9 @@ class Delivery_Admin {
 		
 		// Process cache clear.
 		add_action( 'admin_init', array( $this, 'process_cache_clear' ) );
+		
+		// Display migration notice if needed.
+		add_action( 'admin_init', array( $this, 'check_migration_log' ) );
 	}
 
 	/**
@@ -79,5 +82,26 @@ class Delivery_Admin {
 			<p><?php echo esc_html__( 'Delivery API cache has been cleared successfully.', 'ip-delivery-shipping' ); ?></p>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Check and display migration log if it exists.
+	 */
+	public function check_migration_log() {
+		$migration_log = get_option( 'delivery_migration_log' );
+		
+		if ( ! empty( $migration_log ) ) {
+			// Remove old log after display
+			delete_option( 'delivery_migration_log' );
+			
+			// Add admin notice
+			add_action( 'admin_notices', function() use ( $migration_log ) {
+				?>
+				<div class="notice notice-success is-dismissible">
+					<p><strong>Delivery:</strong> <?php echo esc_html( $migration_log ); ?></p>
+				</div>
+				<?php
+			} );
+		}
 	}
 } 

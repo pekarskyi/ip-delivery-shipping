@@ -45,13 +45,42 @@ class Delivery_API {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$settings = get_option( 'woocommerce_delivery_settings' );
-		$this->public_key = isset( $settings['public_key'] ) ? sanitize_text_field( $settings['public_key'] ) : '';
-		$this->secret_key = isset( $settings['secret_key'] ) ? sanitize_text_field( $settings['secret_key'] ) : '';
+		// Отримуємо налаштування з бази даних
+		$this->get_settings();
 
 		// Застосування фільтра для часу кешування.
 		$this->cache_time = apply_filters( 'delivery_cache_time', $this->cache_time );
 		$this->cache_time = absint( $this->cache_time ); // Переконуємося, що значення ціле та позитивне.
+	}
+	
+	/**
+	 * Отримуємо налаштування з БД
+	 */
+	protected function get_settings() {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'ip_delivery_settings';
+		
+		// Перевіряємо чи існує таблиця
+		if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name) {
+			// Отримуємо API ключі з нової таблиці
+			$public_key = $wpdb->get_var("SELECT setting_value FROM $table_name WHERE setting_key = 'public_key'");
+			$secret_key = $wpdb->get_var("SELECT setting_value FROM $table_name WHERE setting_key = 'secret_key'");
+			
+			if($public_key) {
+				$this->public_key = $public_key;
+			}
+			
+			if($secret_key) {
+				$this->secret_key = $secret_key;
+			}
+		}
+		
+		// Якщо не вдалося отримати ключі з нової таблиці, використовуємо стару опцію
+		if(empty($this->public_key) || empty($this->secret_key)) {
+			$settings = get_option( 'woocommerce_delivery_settings' );
+			$this->public_key = isset( $settings['public_key'] ) ? sanitize_text_field( $settings['public_key'] ) : '';
+			$this->secret_key = isset( $settings['secret_key'] ) ? sanitize_text_field( $settings['secret_key'] ) : '';
+		}
 	}
 
 	/**

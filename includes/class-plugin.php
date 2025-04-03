@@ -51,6 +51,13 @@ final class Delivery_Plugin {
 	public $checkout = null;
 
 	/**
+	 * Database handler instance.
+	 *
+	 * @var Delivery_DB
+	 */
+	public $db = null;
+
+	/**
 	 * Main Delivery_Plugin Instance.
 	 *
 	 * Ensures only one instance of Delivery_Plugin is loaded or can be loaded.
@@ -112,6 +119,11 @@ final class Delivery_Plugin {
 	 * Include required core files used in admin and frontend.
 	 */
 	public function includes() {
+		// Включаємо клас бази даних тільки якщо він ще не включений
+		if ( ! class_exists( 'Delivery_DB' ) ) {
+			include_once DELIVERY_ABSPATH . 'includes/class-db.php';
+		}
+		
 		// Включаємо тільки клас API, оскільки він не залежить від WooCommerce.
 		include_once DELIVERY_ABSPATH . 'includes/class-api.php';
 		
@@ -129,6 +141,11 @@ final class Delivery_Plugin {
 	 * Hook into actions and filters.
 	 */
 	private function init_hooks() {
+		// Завантажуємо клас бази даних для реєстрації хуків активації
+		include_once DELIVERY_ABSPATH . 'includes/class-db.php';
+		// Реєструємо хук активації
+		Delivery_DB::register_hooks();
+		
 		// Load plugin text domain.
 		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 		
@@ -166,6 +183,9 @@ final class Delivery_Plugin {
 	 * Initialize plugin classes.
 	 */
 	public function init_classes() {
+		// Ініціалізуємо класс бази даних
+		$this->db = new Delivery_DB();
+		
 		// Ініціалізуємо API незалежно від WooCommerce.
 		$this->api = new Delivery_API();
 		$this->admin = new Delivery_Admin();

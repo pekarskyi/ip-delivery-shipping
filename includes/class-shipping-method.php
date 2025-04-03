@@ -56,6 +56,144 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 		// Save settings in admin if you have any defined
 		add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
 	}
+	
+	/**
+	 * Перевизначаємо метод для збереження у власній таблиці БД
+	 *
+	 * @return bool
+	 */
+	public function process_admin_options() {
+		$this->init_settings();
+
+		$post_data = $this->get_post_data();
+
+		foreach ( $this->get_form_fields() as $key => $field ) {
+			if ( 'title' !== $this->get_field_type( $field ) ) {
+				try {
+					$this->settings[ $key ] = $this->get_field_value( $key, $field, $post_data );
+				} catch ( Exception $e ) {
+					$this->add_error( $e->getMessage() );
+				}
+			}
+		}
+		
+		// Зберігаємо частину налаштувань у стандартному місці для сумісності з WooCommerce
+		update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, $this->settings ), 'yes' );
+		
+		// Зберігаємо налаштування в нашій БД
+		$this->save_settings_to_db($this->settings);
+		
+		return update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, $this->settings ), 'yes' );
+	}
+	
+	/**
+	 * Зберігаємо налаштування в нашій власній таблиці БД
+	 *
+	 * @param array $settings Налаштування для збереження
+	 * @return bool Результат збереження
+	 */
+	protected function save_settings_to_db($settings) {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'ip_delivery_settings';
+		
+		// Перевіряємо чи існує таблиця, якщо ні - створюємо
+		if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+			$charset_collate = $wpdb->get_charset_collate();
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				setting_key varchar(191) NOT NULL,
+				setting_value longtext NOT NULL,
+				PRIMARY KEY  (id),
+				UNIQUE KEY setting_key (setting_key)
+			) $charset_collate;";
+			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+			dbDelta($sql);
+		}
+		
+		// Видаляємо всі попередні налаштування
+		$wpdb->query("TRUNCATE TABLE $table_name");
+		
+		// Зберігаємо кожне налаштування окремо
+		foreach($settings as $key => $value) {
+			$wpdb->insert(
+				$table_name,
+				array(
+					'setting_key' => $key,
+					'setting_value' => is_array($value) ? serialize($value) : $value
+				),
+				array(
+					'%s',
+					'%s'
+				)
+			);
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Отримуємо налаштування з нашої таблиці БД
+	 *
+	 * @return array Налаштування
+	 */
+	protected function get_settings_from_db() {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'ip_delivery_settings';
+		
+		// Перевіряємо чи існує таблиця
+		if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+			return array();
+		}
+		
+		$settings = array();
+		$results = $wpdb->get_results("SELECT setting_key, setting_value FROM $table_name", ARRAY_A);
+		
+		if($results) {
+			foreach($results as $row) {
+				$value = $row['setting_value'];
+				// Перевіряємо чи це серіалізовані дані
+				if(@unserialize($value) !== false) {
+					$value = unserialize($value);
+				}
+				$settings[$row['setting_key']] = $value;
+			}
+		}
+		
+		return $settings;
+	}
+	
+	/**
+	 * Перевизначаємо метод для отримання налаштувань з власної таблиці БД
+	 *
+	 * @param string $key Ключ налаштування
+	 * @param mixed $empty_value Значення за замовчуванням
+	 * @return mixed
+	 */
+	public function get_option( $key, $empty_value = null ) {
+		// Спочатку спробуємо отримати налаштування з нашої БД
+		$settings = $this->get_settings_from_db();
+		
+		if(isset($settings[$key])) {
+			return $settings[$key];
+		}
+		
+		// Якщо не знайдено, використовуємо стандартний механізм WooCommerce
+		if ( empty( $this->settings ) ) {
+			$this->init_settings();
+		}
+
+		// Get option default if unset.
+		if ( ! isset( $this->settings[ $key ] ) ) {
+			$form_fields            = $this->get_form_fields();
+			$this->settings[ $key ] = isset( $form_fields[ $key ] ) ? $this->get_field_default( $form_fields[ $key ] ) : '';
+		}
+
+		if ( ! is_null( $empty_value ) && '' === $this->settings[ $key ] ) {
+			$this->settings[ $key ] = $empty_value;
+		}
+
+		return $this->settings[ $key ];
+	}
 
 	/**
 	 * Define settings field for this shipping
@@ -118,6 +256,19 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 				'description' => __( 'The plugin caches API responses for better performance. Cache lifetime: 24 hours.', 'ip-delivery-shipping' ) . 
 				'&nbsp;&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=delivery&clear_cache=1&_wpnonce=' . wp_create_nonce( 'delivery_clear_cache' ) ) ) . '" class="button-secondary" id="delivery-clear-cache-link">' . esc_html__( 'Clear Cache', 'ip-delivery-shipping' ) . '</a>',
 			),
+			
+			'cleanup_options' => array(
+				'title' => __( 'Cleanup Options', 'ip-delivery-shipping' ),
+				'type' => 'title',
+				'description' => __( 'Settings for plugin data cleanup.', 'ip-delivery-shipping' ),
+			),
+			
+			'delete_data' => array(
+				'title' => __( 'Delete data on uninstall', 'ip-delivery-shipping' ),
+				'type' => 'checkbox',
+				'description' => __( 'Delete all plugin data from database when the plugin is uninstalled.', 'ip-delivery-shipping' ),
+				'default' => 'no'
+			),
 		);
 	}
 
@@ -137,8 +288,11 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 			'package' => $package,
 			'base_cost' => $base_cost,
 			'instance_id' => $this->id,
+			'region_id' => isset( $_POST['delivery'] ) ? sanitize_text_field( $_POST['delivery'] ) : '',
 			'region' => isset( $_POST['delivery_delivery_name'] ) ? sanitize_text_field( $_POST['delivery_delivery_name'] ) : '',
+			'city_id' => isset( $_POST['city'] ) ? sanitize_text_field( $_POST['city'] ) : '',
 			'city' => isset( $_POST['delivery_city_name'] ) ? sanitize_text_field( $_POST['delivery_city_name'] ) : '',
+			'warehouse_id' => isset( $_POST['warehouses'] ) ? sanitize_text_field( $_POST['warehouses'] ) : '',
 			'warehouse' => isset( $_POST['delivery_warehouses_name'] ) ? sanitize_text_field( $_POST['delivery_warehouses_name'] ) : '',
 		);
 		
