@@ -279,7 +279,7 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 				'title' => __( 'Cache Options', 'ip-delivery-shipping' ),
 				'type' => 'title',
 				'description' => __( 'The plugin caches API responses for better performance. Cache lifetime: 24 hours.', 'ip-delivery-shipping' ) . 
-				'&nbsp;&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=ip-delivery&clear_cache=1&_wpnonce=' . wp_create_nonce( 'delivery_clear_cache' ) ) ) . '" class="button red" id="delivery-clear-cache-link">' . esc_html__( 'Clear Cache', 'ip-delivery-shipping' ) . '</a>',
+				'&nbsp;&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=ip-delivery&clear_cache=1&_wpnonce=' . wp_create_nonce( 'delivery_clear_cache' ) ) ) . '" class="button ip-delivery yellow" id="delivery-clear-cache-link">' . esc_html__( 'Clear Cache', 'ip-delivery-shipping' ) . '</a>',
 				'class' => 'delivery-settings-section'
 			),
 			

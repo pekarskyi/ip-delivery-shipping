@@ -1,6 +1,6 @@
 /* IP Delivery Admin Styles */
 
-.button.red {
+.button.ip-delivery.yellow {
     background-color: #F59604;
     color: #000;
     border: none;
@@ -9,7 +9,7 @@
     border-radius: 50px;
 }
 
-.button.red:hover {
+.button.ip-delivery:hover {
     background-color: #000;
     color: #FFF;
 }
