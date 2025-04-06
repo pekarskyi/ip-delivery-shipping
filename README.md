@@ -24,7 +24,7 @@
 - Мови: англійська, українська.
 - Система оновлення плагіну з репозиторію
 
-Увага! Дана версія плагіна (1.1.0) не підтримує різну базову вартість для різних Зон доставок! Тобто, одна базова вартість доставки діє для всіх зон.
+Увага! Дана версія плагіна (1.0.0) не підтримує різну базову вартість для різних Зон доставок! Тобто, одна базова вартість доставки діє для всіх зон.
 
 ### Підтримка WooCommerce HPOS
 
@@ -34,6 +34,14 @@
 - Ви можете безпечно активувати HPOS у своєму магазині WooCommerce
 - Всі метадані замовлень (регіон, місто, відділення доставки) коректно зберігаються і відображаються при будь-якому типі зберігання
 - Плагін автоматично адаптується до вибраного методу зберігання замовлень
+
+## Скріншоти
+
+![https://github.com/pekarskyi/assets/raw/master/ip-delivery-shipping/delivery_form1.jpg](https://github.com/pekarskyi/assets/raw/master/ip-delivery-shipping/delivery_form1.jpg)
+
+![https://github.com/pekarskyi/assets/raw/master/ip-delivery-shipping/delivery_form2.jpg](https://github.com/pekarskyi/assets/raw/master/ip-delivery-shipping/delivery_form2.jpg)
+
+![https://github.com/pekarskyi/assets/raw/master/ip-delivery-shipping/delivery_sett.jpg](https://github.com/pekarskyi/assets/raw/master/ip-delivery-shipping/delivery_sett.jpg)
 
 ## Встановлення
 
@@ -50,9 +58,8 @@
 
 ## Налаштування
 
-1. Перейдіть до розділу `WooCommerce > Налаштування > Доставка`
-2. Натисніть на `Доставка Делівері`
-3. Увімкніть метод доставки та налаштуйте його параметри:
+1. Перейдіть до розділу `IP Delivery`
+2. Увімкніть метод доставки та налаштуйте його параметри:
    - Заголовок для відображення на сайті
    - Базова вартість доставки
    - API-ключі доступу до Делівері

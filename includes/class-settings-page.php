@@ -297,6 +297,19 @@ class Delivery_Settings_Page {
 			)
 		);
 		
+		add_settings_field(
+			'hide_country_field',
+			__( 'Hide Country field', 'ip-delivery-shipping' ),
+			array( $this, 'checkbox_field_callback' ),
+			'ip-delivery-settings',
+			'delivery_checkout_section',
+			array(
+				'id' => 'hide_country_field',
+				'default' => 'yes',
+				'description' => __( 'Hide the Country field on checkout page. Uncheck to allow country selection.', 'ip-delivery-shipping' )
+			)
+		);
+		
 		// Додаємо поля для секції "Cleanup Options"
 		add_settings_field(
 			'delete_data',
@@ -435,7 +448,7 @@ class Delivery_Settings_Page {
 		$sanitized_input = array();
 		
 		// Для прапорців встановлюємо значення 'no', якщо вони не вибрані
-		$checkboxes = array( 'enabled', 'two_column_fields', 'delete_data' );
+		$checkboxes = array( 'enabled', 'two_column_fields', 'hide_country_field', 'delete_data' );
 		foreach ( $checkboxes as $checkbox ) {
 			$sanitized_input[$checkbox] = isset( $input[$checkbox] ) ? 'yes' : 'no';
 		}

@@ -111,12 +111,21 @@ class Delivery_Address_Fields {
 	 */
 	public function script_update_shipping_method() {
 		if ( is_checkout() ) {
+			// Отримуємо налаштування з класу доставки
+			$shipping_method = $this->get_delivery_shipping_method();
+			$hide_country = $shipping_method && 'yes' === $shipping_method->get_option( 'hide_country_field', 'yes' );
+			
+			// Додаємо CSS тільки якщо опція активована
+			if ( $hide_country ) {
 			?>
 			<style>
 				#billing_country_field {
 					display: none !important;
 				}
 			</style>
+			<?php
+			}
+			?>
 			<script>
 				jQuery(document).ready(function ($) {
 					// Оновлення форми при зміні способу доставки

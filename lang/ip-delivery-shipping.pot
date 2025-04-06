@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Delivery for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 13:36+0000\n"
+"POT-Creation-Date: 2025-04-06 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Cleanup Options"
 msgstr ""
 
-#: includes/class-settings-page.php:344
+#: includes/class-settings-page.php:357
 msgid "Clear Cache"
 msgstr ""
 
@@ -65,11 +65,11 @@ msgstr ""
 msgid "Cloning is forbidden."
 msgstr ""
 
-#: includes/class-settings-page.php:310
+#: includes/class-settings-page.php:323
 msgid "Delete all plugin data from database when the plugin is uninstalled."
 msgstr ""
 
-#: includes/class-settings-page.php:303
+#: includes/class-settings-page.php:316
 msgid "Delete data on uninstall"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgid "Delivery for WooCommerce"
 msgstr ""
 
 #: includes/class-plugin.php:257 includes/class-settings-page.php:161
-#: includes/class-settings-page.php:482
+#: includes/class-settings-page.php:495
 msgid "Delivery Settings"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Display Phone and Email fields in two columns"
 msgstr ""
 
-#: includes/class-settings-page.php:423
+#: includes/class-settings-page.php:436
 msgid "Enable"
 msgstr ""
 
@@ -139,6 +139,15 @@ msgstr ""
 
 #: includes/class-settings-page.php:185
 msgid "General Settings"
+msgstr ""
+
+#: includes/class-settings-page.php:302
+msgid "Hide Country field"
+msgstr ""
+
+#: includes/class-settings-page.php:309
+msgid ""
+"Hide the Country field on checkout page. Uncheck to allow country selection."
 msgstr ""
 
 #. URI of the plugin
@@ -221,11 +230,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings-page.php:478
+#: includes/class-settings-page.php:491
 msgid "Settings saved successfully."
 msgstr ""
 
-#: includes/class-settings-page.php:343
+#: includes/class-settings-page.php:356
 msgid ""
 "The plugin caches API responses for better performance. Cache lifetime: 24 "
 "hours."
@@ -239,7 +248,7 @@ msgstr ""
 msgid "Title to display on site"
 msgstr ""
 
-#: includes/class-settings-page.php:327
+#: includes/class-settings-page.php:340
 #, php-format
 msgid ""
 "To get API keys, please visit <a href=\"%s\" target=\"_blank\">Delivery API "

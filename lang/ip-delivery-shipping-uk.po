@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: Delivery for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-27 21:19+0000\n"
-"PO-Revision-Date: 2025-04-06 13:37+0000\n"
+"PO-Revision-Date: 2025-04-06 14:18+0000\n"
 "Last-Translator: \n"
-"Language-Team: Українська\n"
+"Language-Team: Ukrainian\n"
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
 "n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
@@ -57,7 +57,7 @@ msgstr "Ідентифікатор міста не вказано"
 msgid "Cleanup Options"
 msgstr "Очищення даних"
 
-#: includes/class-settings-page.php:344
+#: includes/class-settings-page.php:357
 msgid "Clear Cache"
 msgstr "Очистити кеш"
 
@@ -65,11 +65,11 @@ msgstr "Очистити кеш"
 msgid "Cloning is forbidden."
 msgstr "Клонування заборонено."
 
-#: includes/class-settings-page.php:310
+#: includes/class-settings-page.php:323
 msgid "Delete all plugin data from database when the plugin is uninstalled."
 msgstr "Видалити всі дані плагіна з бази даних при видаленні плагіна."
 
-#: includes/class-settings-page.php:303
+#: includes/class-settings-page.php:316
 msgid "Delete data on uninstall"
 msgstr "Видалити дані при деінсталяції"
 
@@ -94,7 +94,7 @@ msgid "Delivery for WooCommerce"
 msgstr "Делівері для WooCommerce"
 
 #: includes/class-plugin.php:257 includes/class-settings-page.php:161
-#: includes/class-settings-page.php:482
+#: includes/class-settings-page.php:495
 msgid "Delivery Settings"
 msgstr "Налаштування Делівері"
 
@@ -107,7 +107,7 @@ msgstr "Склад доставки"
 msgid "Display Phone and Email fields in two columns"
 msgstr "Відображати поля Телефон та E-mail у дві колонки"
 
-#: includes/class-settings-page.php:423
+#: includes/class-settings-page.php:436
 msgid "Enable"
 msgstr "Увімкнути"
 
@@ -143,6 +143,17 @@ msgstr ""
 #: includes/class-settings-page.php:185
 msgid "General Settings"
 msgstr "Загальне"
+
+#: includes/class-settings-page.php:302
+msgid "Hide Country field"
+msgstr "Приховати поле Країна"
+
+#: includes/class-settings-page.php:309
+msgid ""
+"Hide the Country field on checkout page. Uncheck to allow country selection."
+msgstr ""
+"Приховати поле Країна на сторінці оформлення замовлення. Вимкніть, щоб "
+"дозволити вибір країни."
 
 #. URI of the plugin
 msgid "https://github.com/pekarskyi/ip-delivery-shipping"
@@ -224,11 +235,11 @@ msgstr "Помилка з'єднання з сервером при завант
 msgid "Settings"
 msgstr "Налаштування"
 
-#: includes/class-settings-page.php:478
+#: includes/class-settings-page.php:491
 msgid "Settings saved successfully."
 msgstr "Налаштування успішно збережено."
 
-#: includes/class-settings-page.php:343
+#: includes/class-settings-page.php:356
 msgid ""
 "The plugin caches API responses for better performance. Cache lifetime: 24 "
 "hours."
@@ -244,7 +255,7 @@ msgstr "Заголовок"
 msgid "Title to display on site"
 msgstr "Заголовок для відображення на сайті"
 
-#: includes/class-settings-page.php:327
+#: includes/class-settings-page.php:340
 #, php-format
 msgid ""
 "To get API keys, please visit <a href=\"%s\" target=\"_blank\">Delivery API "
