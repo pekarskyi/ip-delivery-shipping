@@ -135,6 +135,9 @@ final class Delivery_Plugin {
 		
 		include_once DELIVERY_ABSPATH . 'includes/class-ajax-handler.php';
 		include_once DELIVERY_ABSPATH . 'includes/class-admin.php';
+		
+		// Підключаємо клас сторінки налаштувань
+		include_once DELIVERY_ABSPATH . 'includes/class-settings-page.php';
 	}
 
 	/**
@@ -161,6 +164,9 @@ final class Delivery_Plugin {
 		// Register shipping method.
 		add_action( 'woocommerce_shipping_init', array( $this, 'woocommerce_shipping_init' ) );
 		add_filter( 'woocommerce_shipping_methods', array( $this, 'add_delivery_shipping_method' ) );
+		
+		// Приховуємо секцію налаштувань в WooCommerce
+		add_action( 'admin_init', array( $this, 'hide_delivery_shipping_settings' ) );
 	}
 
 	/**
@@ -244,5 +250,31 @@ final class Delivery_Plugin {
 			$methods[] = 'Delivery_Shipping_Method';
 		}
 		return $methods;
+	}
+
+	public function add_menu_item() {
+		add_menu_page(
+			__( 'Delivery Settings', 'ip-delivery-shipping' ),
+			__( 'Delivery', 'ip-delivery-shipping' ),
+			'manage_options',
+			'ip-delivery-settings',
+			array( $this, 'render_settings_page' ),
+			'dashicons-car',
+			58 // Позиція в меню
+		);
+	}
+
+	/**
+	 * Приховуємо секцію налаштувань доставки в WooCommerce і перенаправляємо на нашу сторінку
+	 */
+	public function hide_delivery_shipping_settings() {
+		global $pagenow;
+		
+		if ( $pagenow === 'admin.php' && isset($_GET['page']) && $_GET['page'] === 'wc-settings' 
+			&& isset($_GET['tab']) && $_GET['tab'] === 'shipping' 
+			&& isset($_GET['section']) && $_GET['section'] === 'delivery' ) {
+			wp_redirect( admin_url( 'admin.php?page=ip-delivery-settings' ) );
+			exit;
+		}
 	}
 } 

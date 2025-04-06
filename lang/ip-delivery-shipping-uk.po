@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Delivery for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-27 21:19+0000\n"
-"PO-Revision-Date: 2025-04-06 04:03+0000\n"
+"PO-Revision-Date: 2025-04-06 13:37+0000\n"
 "Last-Translator: \n"
 "Language-Team: Українська\n"
 "Language: uk\n"
@@ -16,31 +16,31 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: ip-delivery-shipping"
 
-#: includes/class-shipping-method.php:251
+#: includes/class-settings-page.php:262
 msgid "API Public Key"
 msgstr "Публічний ключ API"
 
-#: includes/class-shipping-method.php:258
+#: includes/class-settings-page.php:275
 msgid "API Secret Key"
 msgstr "Секретний ключ API"
 
-#: includes/class-shipping-method.php:241
+#: includes/class-settings-page.php:192
 msgid "API Settings"
 msgstr "Налаштування API"
 
-#: includes/class-shipping-method.php:230
+#: includes/class-settings-page.php:246
 msgid "Base Cost"
 msgstr "Базова вартість доставки"
 
-#: includes/class-shipping-method.php:232
+#: includes/class-settings-page.php:253
 msgid "Base cost for delivery. Can be modified by filters."
 msgstr "Базова вартість доставки. Може бути змінена фільтрами."
 
-#: includes/class-shipping-method.php:279
+#: includes/class-settings-page.php:206
 msgid "Cache Options"
 msgstr "Параметри кешу"
 
-#: includes/class-shipping-method.php:265
+#: includes/class-settings-page.php:199
 msgid "Checkout Options"
 msgstr "Сторінка Оформлення"
 
@@ -53,11 +53,11 @@ msgstr "Місто"
 msgid "City ID not specified"
 msgstr "Ідентифікатор міста не вказано"
 
-#: includes/class-shipping-method.php:287
+#: includes/class-settings-page.php:213
 msgid "Cleanup Options"
 msgstr "Очищення даних"
 
-#: includes/class-shipping-method.php:282
+#: includes/class-settings-page.php:344
 msgid "Clear Cache"
 msgstr "Очистити кеш"
 
@@ -65,15 +65,22 @@ msgstr "Очистити кеш"
 msgid "Cloning is forbidden."
 msgstr "Клонування заборонено."
 
-#: includes/class-shipping-method.php:296
+#: includes/class-settings-page.php:310
 msgid "Delete all plugin data from database when the plugin is uninstalled."
 msgstr "Видалити всі дані плагіна з бази даних при видаленні плагіна."
 
-#: includes/class-shipping-method.php:294
+#: includes/class-settings-page.php:303
 msgid "Delete data on uninstall"
 msgstr "Видалити дані при деінсталяції"
 
-#: includes/class-admin.php:105
+#: includes/class-checkout.php:266 includes/class-plugin.php:258
+#: includes/class-settings-page.php:239 includes/class-shipping-method.php:24
+#: includes/class-shipping-method.php:49 includes/class-shipping-method.php:73
+#: includes/class-shipping-method.php:134
+msgid "Delivery"
+msgstr "Делівері"
+
+#: includes/class-admin.php:86
 msgid "Delivery API cache has been cleared successfully."
 msgstr "Кеш API Делівері успішно очищено."
 
@@ -86,27 +93,27 @@ msgstr "Клас API доставки не знайдено."
 msgid "Delivery for WooCommerce"
 msgstr "Делівері для WooCommerce"
 
-#: includes/class-checkout.php:266 includes/class-shipping-method.php:24
-#: includes/class-shipping-method.php:36 includes/class-shipping-method.php:226
-msgid "Delivery Service"
-msgstr "Доставка Делівері"
+#: includes/class-plugin.php:257 includes/class-settings-page.php:161
+#: includes/class-settings-page.php:482
+msgid "Delivery Settings"
+msgstr "Налаштування Делівері"
 
 #: includes/class-checkout.php:139 includes/class-checkout.php:150
 #: includes/class-checkout.php:180 includes/class-checkout.php:194
 msgid "Delivery Warehouse"
 msgstr "Склад доставки"
 
-#: includes/class-shipping-method.php:272
+#: includes/class-settings-page.php:289
 msgid "Display Phone and Email fields in two columns"
 msgstr "Відображати поля Телефон та E-mail у дві колонки"
 
-#: includes/class-shipping-method.php:216
+#: includes/class-settings-page.php:423
 msgid "Enable"
 msgstr "Увімкнути"
 
-#: includes/class-shipping-method.php:218
-msgid "Enable this shipping method."
-msgstr "Увімкніть цей спосіб доставки."
+#: includes/class-settings-page.php:221
+msgid "Enable Delivery"
+msgstr "Увімкнути доставку Делівері"
 
 #: includes/class-checkout.php:77
 msgid "Error loading regions. Check plugin settings and API keys."
@@ -125,7 +132,7 @@ msgstr "Не вдалося отримати список регіонів. Пе
 msgid "Failed to get warehouses list"
 msgstr "Не вдалося отримати список складів"
 
-#: includes/class-shipping-method.php:274
+#: includes/class-settings-page.php:296
 msgid ""
 "Field display may be affected by your theme or other plugins. Please check "
 "how these fields are displayed."
@@ -133,7 +140,7 @@ msgstr ""
 "На відображення полів на сторінці може впливати активна тема або активні "
 "плагіни. Будь ласка, перевірте, як відображаються ці поля."
 
-#: includes/class-shipping-method.php:209
+#: includes/class-settings-page.php:185
 msgid "General Settings"
 msgstr "Загальне"
 
@@ -153,7 +160,11 @@ msgstr "Неправильний формат даних про регіони. 
 msgid "InwebPress"
 msgstr "InwebPress"
 
-#: includes/class-shipping-method.php:232
+#: includes/class-settings-page.php:162
+msgid "IP Delivery"
+msgstr "IP Delivery"
+
+#: includes/class-settings-page.php:253
 msgid "Learn more about filters"
 msgstr "Дізнайтеся більше про фільтри"
 
@@ -173,7 +184,7 @@ msgstr "Будь ласка, оберіть регіон для доставки
 msgid "Please select a warehouse for Delivery shipping"
 msgstr "Будь ласка, оберіть склад для доставки"
 
-#: includes/class-shipping-method.php:253
+#: includes/class-settings-page.php:269
 msgid "Public key for Delivery API access"
 msgstr "Відкритий ключ для доступу до Делівері API"
 
@@ -186,7 +197,7 @@ msgstr "Регіон"
 msgid "Region ID not specified"
 msgstr "Ідентифікатор регіону не вказано"
 
-#: includes/class-shipping-method.php:260
+#: includes/class-settings-page.php:282
 msgid "Secret key for Delivery API access"
 msgstr "Секретний ключ для доступу до Делівері API"
 
@@ -209,11 +220,15 @@ msgstr "Виберіть cклад"
 msgid "Server connection error when loading regions."
 msgstr "Помилка з'єднання з сервером при завантаженні регіонів."
 
-#: includes/class-admin.php:42
+#: includes/class-admin.php:39 includes/class-shipping-method.php:197
 msgid "Settings"
 msgstr "Налаштування"
 
-#: includes/class-shipping-method.php:281
+#: includes/class-settings-page.php:478
+msgid "Settings saved successfully."
+msgstr "Налаштування успішно збережено."
+
+#: includes/class-settings-page.php:343
 msgid ""
 "The plugin caches API responses for better performance. Cache lifetime: 24 "
 "hours."
@@ -221,15 +236,15 @@ msgstr ""
 "Плагін кешує відповіді API для кращої продуктивності. Час життя кешу: 24 "
 "години."
 
-#: includes/class-shipping-method.php:223
+#: includes/class-settings-page.php:233
 msgid "Title"
 msgstr "Заголовок"
 
-#: includes/class-shipping-method.php:225
+#: includes/class-settings-page.php:240
 msgid "Title to display on site"
 msgstr "Заголовок для відображення на сайті"
 
-#: includes/class-shipping-method.php:244
+#: includes/class-settings-page.php:327
 #, php-format
 msgid ""
 "To get API keys, please visit <a href=\"%s\" target=\"_blank\">Delivery API "

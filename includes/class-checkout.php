@@ -263,7 +263,7 @@ class Delivery_Checkout {
 		// Отримуємо заголовок з налаштувань.
 		$title = $this->get_setting('title');
 		if (empty($title)) {
-			$title = __( 'Delivery Service', 'ip-delivery-shipping' );
+			$title = __( 'Delivery', 'ip-delivery-shipping' );
 		}
 		
 		echo '<div id="delivery_checkout_field" style="display: none;"><h3>' . esc_html( $title ) . '</h3>';

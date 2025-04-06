@@ -1,0 +1,15 @@
+# Ігнорувати папку .cursor
+.cursor/
+
+# Custom files
+includes_desc.txt
+
+# Виключаємо файли з IDE
+.idea/
+.vscode/
+
+# Локальні файли
+.DS_Store
+Thumbs.db
+.htaccess
+error_log 

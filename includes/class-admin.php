@@ -24,9 +24,6 @@ class Delivery_Admin {
 		// Process cache clear.
 		add_action( 'admin_init', array( $this, 'process_cache_clear' ) );
 		
-		// Display migration notice if needed.
-		add_action( 'admin_init', array( $this, 'check_migration_log' ) );
-		
 		// Підключаємо стилі для адмін-панелі
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 	}
@@ -39,7 +36,7 @@ class Delivery_Admin {
 	 */
 	public function add_plugin_action_links( $links ) {
 		$action_links = array(
-			'settings' => '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=ip-delivery' ) ) . '">' . esc_html__( 'Settings', 'ip-delivery-shipping' ) . '</a>'
+			'settings' => '<a href="' . esc_url( admin_url( 'admin.php?page=ip-delivery-settings' ) ) . '">' . esc_html__( 'Settings', 'ip-delivery-shipping' ) . '</a>'
 		);
 		
 		return array_merge( $action_links, $links );
@@ -51,11 +48,13 @@ class Delivery_Admin {
 	public function enqueue_admin_styles() {
 		$screen = get_current_screen();
 		
-		// Підключаємо стилі тільки на сторінці налаштувань плагіна
-		if ( isset( $screen->id ) && $screen->id === 'woocommerce_page_wc-settings' && 
+		// Підключаємо стилі на сторінці налаштувань плагіна та на сторінці налаштувань в WooCommerce
+		if ( 
+			(isset( $screen->id ) && $screen->id === 'toplevel_page_ip-delivery-settings') ||
+			(isset( $screen->id ) && $screen->id === 'woocommerce_page_wc-settings' && 
 			isset( $_GET['tab'] ) && sanitize_text_field( $_GET['tab'] ) === 'shipping' && 
-			isset( $_GET['section'] ) && sanitize_text_field( $_GET['section'] ) === 'ip-delivery' ) {
-			
+			isset( $_GET['section'] ) && sanitize_text_field( $_GET['section'] ) === 'ip-delivery')
+		) {
 			wp_enqueue_style(
 				'ip-delivery-admin',
 				plugins_url( 'assets/css/ip-delivery-admin.css', DELIVERY_PLUGIN_FILE ),
@@ -70,9 +69,7 @@ class Delivery_Admin {
 	 */
 	public function process_cache_clear() {
 		// Перевіряємо, чи ми на сторінці налаштувань Delivery і чи запитане очищення кешу.
-		if ( isset( $_GET['page'] ) && sanitize_text_field( $_GET['page'] ) === 'wc-settings' && 
-			isset( $_GET['tab'] ) && sanitize_text_field( $_GET['tab'] ) === 'shipping' && 
-			isset( $_GET['section'] ) && sanitize_text_field( $_GET['section'] ) === 'ip-delivery' && 
+		if ( isset( $_GET['page'] ) && sanitize_text_field( $_GET['page'] ) === 'ip-delivery-settings' && 
 			isset( $_GET['clear_cache'] ) && sanitize_text_field( $_GET['clear_cache'] ) == '1' && 
 			isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ), 'delivery_clear_cache' ) ) {
 			
@@ -82,49 +79,16 @@ class Delivery_Admin {
 			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_delivery_%'" );
 			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_delivery_%'" );
 			
-			// Перенаправляємо назад на сторінку налаштувань без параметрів очищення кешу.
-			wp_redirect( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=ip-delivery&cache_cleared=1' ) );
+			// Перенаправляємо назад на сторінку налаштувань з повідомленням
+			wp_redirect( add_query_arg(
+				array(
+					'page' => 'ip-delivery-settings',
+					'delivery_notice' => urlencode(__('Delivery API cache has been cleared successfully.', 'ip-delivery-shipping')),
+					'delivery_notice_type' => 'success'
+				),
+				admin_url('admin.php')
+			));
 			exit;
-		}
-		
-		// Показуємо повідомлення після очищення кешу.
-		if ( isset( $_GET['page'] ) && sanitize_text_field( $_GET['page'] ) === 'wc-settings' && 
-			isset( $_GET['tab'] ) && sanitize_text_field( $_GET['tab'] ) === 'shipping' && 
-			isset( $_GET['section'] ) && sanitize_text_field( $_GET['section'] ) === 'ip-delivery' && 
-			isset( $_GET['cache_cleared'] ) && sanitize_text_field( $_GET['cache_cleared'] ) == '1' ) {
-			add_action( 'admin_notices', array( $this, 'cache_cleared_notice' ) );
-		}
-	}
-
-	/**
-	 * Display cache cleared notice.
-	 */
-	public function cache_cleared_notice() {
-		?>
-		<div class="notice notice-success is-dismissible">
-			<p><?php echo esc_html__( 'Delivery API cache has been cleared successfully.', 'ip-delivery-shipping' ); ?></p>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Check and display migration log if it exists.
-	 */
-	public function check_migration_log() {
-		$migration_log = get_option( 'delivery_migration_log' );
-		
-		if ( ! empty( $migration_log ) ) {
-			// Remove old log after display
-			delete_option( 'delivery_migration_log' );
-			
-			// Add admin notice
-			add_action( 'admin_notices', function() use ( $migration_log ) {
-				?>
-				<div class="notice notice-success is-dismissible">
-					<p><strong>Delivery:</strong> <?php echo esc_html( $migration_log ); ?></p>
-				</div>
-				<?php
-			} );
 		}
 	}
 } 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Delivery for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 04:00+0000\n"
+"POT-Creation-Date: 2025-04-06 13:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,31 +16,31 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: ip-delivery-shipping"
 
-#: includes/class-shipping-method.php:251
+#: includes/class-settings-page.php:262
 msgid "API Public Key"
 msgstr ""
 
-#: includes/class-shipping-method.php:258
+#: includes/class-settings-page.php:275
 msgid "API Secret Key"
 msgstr ""
 
-#: includes/class-shipping-method.php:241
+#: includes/class-settings-page.php:192
 msgid "API Settings"
 msgstr ""
 
-#: includes/class-shipping-method.php:230
+#: includes/class-settings-page.php:246
 msgid "Base Cost"
 msgstr ""
 
-#: includes/class-shipping-method.php:232
+#: includes/class-settings-page.php:253
 msgid "Base cost for delivery. Can be modified by filters."
 msgstr ""
 
-#: includes/class-shipping-method.php:279
+#: includes/class-settings-page.php:206
 msgid "Cache Options"
 msgstr ""
 
-#: includes/class-shipping-method.php:265
+#: includes/class-settings-page.php:199
 msgid "Checkout Options"
 msgstr ""
 
@@ -53,11 +53,11 @@ msgstr ""
 msgid "City ID not specified"
 msgstr ""
 
-#: includes/class-shipping-method.php:287
+#: includes/class-settings-page.php:213
 msgid "Cleanup Options"
 msgstr ""
 
-#: includes/class-shipping-method.php:282
+#: includes/class-settings-page.php:344
 msgid "Clear Cache"
 msgstr ""
 
@@ -65,15 +65,22 @@ msgstr ""
 msgid "Cloning is forbidden."
 msgstr ""
 
-#: includes/class-shipping-method.php:296
+#: includes/class-settings-page.php:310
 msgid "Delete all plugin data from database when the plugin is uninstalled."
 msgstr ""
 
-#: includes/class-shipping-method.php:294
+#: includes/class-settings-page.php:303
 msgid "Delete data on uninstall"
 msgstr ""
 
-#: includes/class-admin.php:105
+#: includes/class-checkout.php:266 includes/class-plugin.php:258
+#: includes/class-settings-page.php:239 includes/class-shipping-method.php:24
+#: includes/class-shipping-method.php:49 includes/class-shipping-method.php:73
+#: includes/class-shipping-method.php:134
+msgid "Delivery"
+msgstr ""
+
+#: includes/class-admin.php:86
 msgid "Delivery API cache has been cleared successfully."
 msgstr ""
 
@@ -86,9 +93,9 @@ msgstr ""
 msgid "Delivery for WooCommerce"
 msgstr ""
 
-#: includes/class-checkout.php:266 includes/class-shipping-method.php:24
-#: includes/class-shipping-method.php:36 includes/class-shipping-method.php:226
-msgid "Delivery Service"
+#: includes/class-plugin.php:257 includes/class-settings-page.php:161
+#: includes/class-settings-page.php:482
+msgid "Delivery Settings"
 msgstr ""
 
 #: includes/class-checkout.php:139 includes/class-checkout.php:150
@@ -96,16 +103,16 @@ msgstr ""
 msgid "Delivery Warehouse"
 msgstr ""
 
-#: includes/class-shipping-method.php:272
+#: includes/class-settings-page.php:289
 msgid "Display Phone and Email fields in two columns"
 msgstr ""
 
-#: includes/class-shipping-method.php:216
+#: includes/class-settings-page.php:423
 msgid "Enable"
 msgstr ""
 
-#: includes/class-shipping-method.php:218
-msgid "Enable this shipping method."
+#: includes/class-settings-page.php:221
+msgid "Enable Delivery"
 msgstr ""
 
 #: includes/class-checkout.php:77
@@ -124,13 +131,13 @@ msgstr ""
 msgid "Failed to get warehouses list"
 msgstr ""
 
-#: includes/class-shipping-method.php:274
+#: includes/class-settings-page.php:296
 msgid ""
 "Field display may be affected by your theme or other plugins. Please check "
 "how these fields are displayed."
 msgstr ""
 
-#: includes/class-shipping-method.php:209
+#: includes/class-settings-page.php:185
 msgid "General Settings"
 msgstr ""
 
@@ -150,7 +157,11 @@ msgstr ""
 msgid "InwebPress"
 msgstr ""
 
-#: includes/class-shipping-method.php:232
+#: includes/class-settings-page.php:162
+msgid "IP Delivery"
+msgstr ""
+
+#: includes/class-settings-page.php:253
 msgid "Learn more about filters"
 msgstr ""
 
@@ -170,7 +181,7 @@ msgstr ""
 msgid "Please select a warehouse for Delivery shipping"
 msgstr ""
 
-#: includes/class-shipping-method.php:253
+#: includes/class-settings-page.php:269
 msgid "Public key for Delivery API access"
 msgstr ""
 
@@ -183,7 +194,7 @@ msgstr ""
 msgid "Region ID not specified"
 msgstr ""
 
-#: includes/class-shipping-method.php:260
+#: includes/class-settings-page.php:282
 msgid "Secret key for Delivery API access"
 msgstr ""
 
@@ -206,25 +217,29 @@ msgstr ""
 msgid "Server connection error when loading regions."
 msgstr ""
 
-#: includes/class-admin.php:42
+#: includes/class-admin.php:39 includes/class-shipping-method.php:197
 msgid "Settings"
 msgstr ""
 
-#: includes/class-shipping-method.php:281
+#: includes/class-settings-page.php:478
+msgid "Settings saved successfully."
+msgstr ""
+
+#: includes/class-settings-page.php:343
 msgid ""
 "The plugin caches API responses for better performance. Cache lifetime: 24 "
 "hours."
 msgstr ""
 
-#: includes/class-shipping-method.php:223
+#: includes/class-settings-page.php:233
 msgid "Title"
 msgstr ""
 
-#: includes/class-shipping-method.php:225
+#: includes/class-settings-page.php:240
 msgid "Title to display on site"
 msgstr ""
 
-#: includes/class-shipping-method.php:244
+#: includes/class-settings-page.php:327
 #, php-format
 msgid ""
 "To get API keys, please visit <a href=\"%s\" target=\"_blank\">Delivery API "

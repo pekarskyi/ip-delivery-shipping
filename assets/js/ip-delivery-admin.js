@@ -3,6 +3,25 @@
  */
 
 jQuery(document).ready(function($) {
+    /**
+     * Обробка подій на сторінці налаштувань плагіна Delivery
+     */
+    
+    // Функція для обробки очищення кешу з сторінки WooCommerce (стара версія)
+    $('#delivery-clear-cache-link').on('click', function(e) {
+        if (!confirm(delivery_admin_params.confirm_clear_cache)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+    
+    // Колір для заголовків блоків налаштувань
+    $('.delivery-settings-section th').closest('tr')
+        .css({
+            'background-color': '#f9f9f9',
+            'border-bottom': '1px solid #e0e0e0'
+        });
+
     // Функція для конвертації чекбоксів у переключачі
     function convertCheckboxesToToggles() {
         // Перевіряємо, що ми на сторінці налаштувань доставки
