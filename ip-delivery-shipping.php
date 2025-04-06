@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Delivery for WooCommerce
  * Description: Ukrainian delivery service "Delivery" for WooCommerce
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: InwebPress
  * Plugin URI: https://github.com/pekarskyi/ip-delivery-shipping
  * Author URI: https://inwebpress.com
@@ -70,4 +70,7 @@ if ( function_exists( 'ip_github_updater_load' ) ) {
             $repo_name       // Repository name (на основі префіксу)
         );
     }
-} 
+}
+
+// Підключаємо файл для керування полями адреси в чекауті
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-address-fields.php'; 

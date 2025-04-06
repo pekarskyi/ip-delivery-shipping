@@ -195,6 +195,31 @@ final class Delivery_Plugin {
 		if ( class_exists( 'WC_Shipping_Method' ) ) {
 			$this->checkout = new Delivery_Checkout();
 		}
+		
+		// Підключаємо стилі для адмін-панелі
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+	}
+
+	/**
+	 * Register and enqueue admin-specific scripts
+	 */
+	public function admin_scripts() {
+		// Підключаємо стилі для адмінки
+		wp_enqueue_style(
+			'ip-delivery-admin',
+			plugins_url( 'assets/css/ip-delivery-admin.css', DELIVERY_PLUGIN_FILE ),
+			array(),
+			filemtime( plugin_dir_path( DELIVERY_PLUGIN_FILE ) . 'assets/css/ip-delivery-admin.css' )
+		);
+		
+		// Підключаємо JavaScript для адмінки
+		wp_enqueue_script(
+			'ip-delivery-admin',
+			plugins_url( 'assets/js/ip-delivery-admin.js', DELIVERY_PLUGIN_FILE ),
+			array( 'jquery' ),
+			filemtime( plugin_dir_path( DELIVERY_PLUGIN_FILE ) . 'assets/js/ip-delivery-admin.js' ),
+			true
+		);
 	}
 
 	/**

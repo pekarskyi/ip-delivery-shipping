@@ -1,0 +1,187 @@
+/* IP Delivery Admin Styles */
+
+.button.red {
+    background-color: #F59604;
+    color: #000;
+    border: none;
+    padding: 0px 20px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.button.red:hover {
+    background-color: #000;
+    color: #FFF;
+}
+
+/* Toggle Switch стилі для чекбоксів */
+.delivery-toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin-right: 10px !important;
+}
+
+.delivery-toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.delivery-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.delivery-toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.delivery-toggle-slider {
+    background-color: #F59604;
+}
+
+input:focus+.delivery-toggle-slider {
+    box-shadow: 0 0 1px #F59604;
+}
+
+input:checked+.delivery-toggle-slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Приховуємо оригінальні чекбокси */
+body.woocommerce_page_wc-settings #mainform .form-table input[type=checkbox] {
+    display: none;
+}
+
+/* Стилі для заголовків секцій на сторінці налаштувань - тільки для сторінки налаштувань методу доставки */
+body.woocommerce_page_wc-settings .delivery-settings-section {
+    margin-top: 25px !important;
+    margin-bottom: 20px !important;
+}
+
+body.woocommerce_page_wc-settings h3.wc-settings-sub-title {
+    font-size: 1.2em !important;
+    font-weight: 400 !important;
+    padding: 10px 15px !important;
+    background-color: #222222 !important;
+    color: #FFF;
+    border-radius: 4px !important;
+    border-left: 4px solid #222222 !important;
+    margin-bottom: 15px !important;
+    max-width: 770px !important;
+}
+
+body.woocommerce_page_wc-settings .woocommerce table.form-table {
+    max-width: 800px;
+}
+
+body.woocommerce_page_wc-settings .woocommerce table.form-table.form-table td fieldset label {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+/* Блоки налаштувань - тільки для сторінки налаштувань методу доставки */
+body.woocommerce_page_wc-settings .form-table th {
+    padding: 15px 10px 15px 0 !important;
+}
+
+body.woocommerce_page_wc-settings tr:not(.delivery-settings-section) {
+    background-color: #fff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.woocommerce_page_wc-settings tr:not(.delivery-settings-section) th,
+body.woocommerce_page_wc-settings tr:not(.delivery-settings-section) td {
+    padding: 20px 25px 5px 25px !important;
+    border-bottom: 0px solid #f0f0f1 !important;
+}
+
+/* Групування налаштувань - тільки для сторінки налаштувань методу доставки */
+body.woocommerce_page_wc-settings #woocommerce_delivery_general_settings_title+tr,
+body.woocommerce_page_wc-settings #woocommerce_delivery_general_settings_title+tr+tr,
+body.woocommerce_page_wc-settings #woocommerce_delivery_general_settings_title+tr+tr+tr {
+    border: 1px solid #e6e6e6 !important;
+    border-bottom: none !important;
+    margin-bottom: 20px !important;
+    display: table-row !important;
+}
+
+body.woocommerce_page_wc-settings #woocommerce_delivery_general_settings_title+tr th,
+body.woocommerce_page_wc-settings #woocommerce_delivery_api_settings_title+tr th,
+body.woocommerce_page_wc-settings #woocommerce_delivery_checkout_options+tr th {
+    border-top-left-radius: 4px !important;
+}
+
+body.woocommerce_page_wc-settings #woocommerce_delivery_general_settings_title+tr td,
+body.woocommerce_page_wc-settings #woocommerce_delivery_api_settings_title+tr td,
+body.woocommerce_page_wc-settings #woocommerce_delivery_checkout_options+tr td {
+    border-top-right-radius: 4px !important;
+}
+
+body.woocommerce_page_wc-settings #woocommerce_delivery_general_settings_title+tr+tr+tr th,
+body.woocommerce_page_wc-settings #woocommerce_delivery_api_settings_title+tr+tr th,
+body.woocommerce_page_wc-settings #woocommerce_delivery_checkout_options+tr th {
+    border-bottom-left-radius: 4px !important;
+}
+
+body.woocommerce_page_wc-settings #woocommerce_delivery_general_settings_title+tr+tr+tr td,
+body.woocommerce_page_wc-settings #woocommerce_delivery_api_settings_title+tr+tr td,
+body.woocommerce_page_wc-settings #woocommerce_delivery_checkout_options+tr td {
+    border-bottom-right-radius: 4px !important;
+}
+
+/* Кнопка очищення кешу */
+body.woocommerce_page_wc-settings #delivery-clear-cache-link {
+    margin-left: 10px !important;
+    vertical-align: middle !important;
+}
+
+/* Форматування чекбоксів */
+body.woocommerce_page_wc-settings .woocommerce-shipping-method-settings input[type=checkbox] {
+    margin-right: 5px !important;
+}
+
+/* Виділення активної секції */
+body.woocommerce_page_wc-settings .delivery-settings-section+tr {
+    border-top: 1px solid #e6e6e6 !important;
+    border-left: 1px solid #e6e6e6 !important;
+    border-right: 1px solid #e6e6e6 !important;
+}
+
+/* Заокруглені кути для груп елементів */
+body.woocommerce_page_wc-settings .woocommerce-shipping-method-settings tr:not(.delivery-settings-section):first-of-type {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+body.woocommerce_page_wc-settings .woocommerce-shipping-method-settings tr:not(.delivery-settings-section):last-of-type {
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    border-bottom: 1px solid #e6e6e6 !important;
+    margin-bottom: 20px !important;
+}

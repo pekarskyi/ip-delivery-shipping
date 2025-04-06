@@ -21,6 +21,9 @@ class Delivery_Checkout {
 		if ( ! function_exists( 'WC' ) ) {
 			return;
 		}
+		
+		// Підключаємо CSS файл для всіх сторінок оформлення замовлення
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		// Add frontend hooks.
 		add_action( 'woocommerce_review_order_before_cart_contents', array( $this, 'validate_order' ), 10 );
@@ -49,181 +52,37 @@ class Delivery_Checkout {
 		if ( is_array( $chosen_methods ) && in_array( 'delivery', $chosen_methods, true ) ) { 
 			// Отримуємо публічний ключ із таблиці БД
 			$public_key = $this->get_setting('public_key');
+			
+			// Підключаємо JS файл з обробниками
+			wp_enqueue_script(
+				'ip-delivery-checkout',
+				plugins_url( 'assets/js/ip-delivery-checkout.js', DELIVERY_PLUGIN_FILE ),
+				array( 'jquery' ),
+				filemtime( plugin_dir_path( DELIVERY_PLUGIN_FILE ) . 'assets/js/ip-delivery-checkout.js' ),
+				true
+			);
+			
+			// Передаємо змінні до JavaScript
+			wp_localize_script(
+				'ip-delivery-checkout',
+				'ipDelivery',
+				array(
+					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+					'translations' => array(
+						'selectRegion' => __( 'Select Region', 'ip-delivery-shipping' ),
+						'selectCity' => __( 'Select City', 'ip-delivery-shipping' ),
+						'selectWarehouse' => __( 'Select Warehouse', 'ip-delivery-shipping' ),
+						'noRegions' => __( 'No regions found. Check plugin settings.', 'ip-delivery-shipping' ),
+						'invalidData' => __( 'Invalid regions data format. Check plugin settings.', 'ip-delivery-shipping' ),
+						'errorLoadingRegions' => __( 'Error loading regions. Check plugin settings and API keys.', 'ip-delivery-shipping' ),
+						'serverError' => __( 'Server connection error when loading regions.', 'ip-delivery-shipping' ),
+						'pleaseSelectRegion' => __( 'Please select a region for Delivery shipping', 'ip-delivery-shipping' ),
+						'pleaseSelectCity' => __( 'Please select a city for Delivery shipping', 'ip-delivery-shipping' ),
+						'pleaseSelectWarehouse' => __( 'Please select a warehouse for Delivery shipping', 'ip-delivery-shipping' ),
+					)
+				)
+			);
 			?>
-			<script>
-				jQuery(document).ready(function() {
-					jQuery('#city').prop('disabled', true);
-					jQuery('#warehouses').prop('disabled', true);
-					
-					// Get regions
-					jQuery.ajax({
-						url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
-						type: 'POST',
-						data: {
-							action: 'delivery_get_areas',
-						},
-						success: function(response) {
-							if (response.success) {
-								let areas = response.data;
-								jQuery('#delivery').find('option').remove();
-								jQuery('#delivery').append(jQuery("<option></option>", {value: 0, text: '<?php echo esc_js( __( "Select Region", "ip-delivery-shipping" ) ); ?>'}));
-								
-								// Check different data formats
-								let areasList = [];
-								
-								if (areas && typeof areas === 'object') {
-									// Check data in different fields
-									if (areas.data && Array.isArray(areas.data)) {
-										areasList = areas.data;
-									} else if (areas.Data && Array.isArray(areas.Data)) {
-										areasList = areas.Data;
-									} else if (Array.isArray(areas)) {
-										areasList = areas;
-									}
-									
-									// If regions array found
-									if (areasList.length > 0) {
-										for (let i = 0; i < areasList.length; i++) {
-											const area = areasList[i];
-											const id = area.Id || area.id || area.ID;
-											const name = area.Name || area.name || area.NAME || area.Description || area.description;
-											
-											if (id && name) {
-												jQuery('#delivery').append(jQuery("<option></option>", {
-													value: id, 
-													text: name
-												}));
-											}
-										}
-									} else {
-										alert('<?php echo esc_js( __( "No regions found. Check plugin settings.", "ip-delivery-shipping" ) ); ?>');
-									}
-								} else {
-									alert('<?php echo esc_js( __( "Invalid regions data format. Check plugin settings.", "ip-delivery-shipping" ) ); ?>');
-								}
-							} else {
-								alert('<?php echo esc_js( __( "Error loading regions. Check plugin settings and API keys.", "ip-delivery-shipping" ) ); ?>');
-							}
-						},
-						error: function(xhr, status, error) {
-							alert('<?php echo esc_js( __( "Server connection error when loading regions.", "ip-delivery-shipping" ) ); ?>');
-						}
-					});
-				});
-				
-				jQuery('#delivery').on('change', function() {
-					if (this.value == 0) return;
-					
-					// Get cities by region
-					jQuery.ajax({
-						url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
-						type: 'POST',
-						data: {
-							action: 'delivery_get_cities',
-							area_id: this.value
-						},
-						success: function(response) {
-							if (response.success) {
-								let cities = response.data;
-								jQuery('#city').prop('disabled', false);
-								jQuery('#city').find('option').remove();
-								jQuery('input[name="delivery_delivery_name"]').val(jQuery('#delivery').find('option:selected').text());
-								jQuery('#city').append(jQuery("<option></option>", {value: 0, text: '<?php echo esc_js( __( "Select City", "ip-delivery-shipping" ) ); ?>'}));
-								
-								if (Array.isArray(cities)) {
-									for (let i = 0; i < cities.length; i++) {
-										jQuery('#city').append(jQuery("<option></option>", {
-											value: cities[i].id || cities[i].Id || cities[i].ID, 
-											text: cities[i].name || cities[i].Name || cities[i].NAME
-										}));
-									}
-								} else if (cities && cities.data && Array.isArray(cities.data)) {
-									for (let i = 0; i < cities.data.length; i++) {
-										jQuery('#city').append(jQuery("<option></option>", {
-											value: cities.data[i].id || cities.data[i].Id || cities.data[i].ID, 
-											text: cities.data[i].name || cities.data[i].Name || cities.data[i].NAME
-										}));
-									}
-								}
-							}
-						}
-					});
-				});
-				
-				jQuery('#city').on('change', function() {
-					if (this.value == 0) return;
-					
-					// Get warehouses by city
-					jQuery.ajax({
-						url: '<?php echo admin_url( 'admin-ajax.php' ); ?>',
-						type: 'POST',
-						data: {
-							action: 'delivery_get_warehouses',
-							city_id: this.value
-						},
-						success: function(response) {
-							if (response.success) {
-								let warehouses = response.data;
-								jQuery('#warehouses').prop('disabled', false);
-								jQuery('#warehouses').find('option').remove();
-								jQuery('input[name="delivery_city_name"]').val(jQuery('#city').find('option:selected').text());
-								jQuery('#warehouses').append(jQuery("<option></option>", {value: 0, text: '<?php echo esc_js( __( "Select Warehouse", "ip-delivery-shipping" ) ); ?>'}));
-								
-								if (Array.isArray(warehouses)) {
-									for (let i = 0; i < warehouses.length; i++) {
-										let address = warehouses[i].address || warehouses[i].Address || warehouses[i].ADDRESS || '';
-										let name = warehouses[i].name || warehouses[i].Name || warehouses[i].NAME || '';
-										jQuery('#warehouses').append(jQuery("<option></option>", {
-											value: warehouses[i].id || warehouses[i].Id || warehouses[i].ID, 
-											text: name + ' (' + address + ')'
-										}));
-									}
-								} else if (warehouses && warehouses.data && Array.isArray(warehouses.data)) {
-									for (let i = 0; i < warehouses.data.length; i++) {
-										let address = warehouses.data[i].address || warehouses.data[i].Address || warehouses.data[i].ADDRESS || '';
-										let name = warehouses.data[i].name || warehouses.data[i].Name || warehouses.data[i].NAME || '';
-										jQuery('#warehouses').append(jQuery("<option></option>", {
-											value: warehouses.data[i].id || warehouses.data[i].Id || warehouses.data[i].ID, 
-											text: name + ' (' + address + ')'
-										}));
-									}
-								}
-							}
-						}
-					});
-				});
-				
-				jQuery('#warehouses').on('change', function() {
-					jQuery('input[name="delivery_warehouses_name"]').val(jQuery(this).find('option:selected').text());
-				});
-				
-				// Додаємо валідацію перед відправкою форми
-				jQuery(document).on('checkout_place_order', function() {
-					if(jQuery('input[name="shipping_method[0]"]:checked').val() === 'delivery') {
-						var region = jQuery('#delivery').val();
-						var city = jQuery('#city').val();
-						var warehouse = jQuery('#warehouses').val();
-						
-						if(region == '0' || region == undefined) {
-							alert('<?php echo esc_js( __( "Please select a region for Delivery shipping", "ip-delivery-shipping" ) ); ?>');
-							jQuery('#delivery').focus();
-							return false;
-						}
-						
-						if(city == '0' || city == undefined) {
-							alert('<?php echo esc_js( __( "Please select a city for Delivery shipping", "ip-delivery-shipping" ) ); ?>');
-							jQuery('#city').focus();
-							return false;
-						}
-						
-						if(warehouse == '0' || warehouse == undefined) {
-							alert('<?php echo esc_js( __( "Please select a warehouse for Delivery shipping", "ip-delivery-shipping" ) ); ?>');
-							jQuery('#warehouses').focus();
-							return false;
-						}
-					}
-				});
-			</script>
 			<style>#delivery_checkout_field{display:block !important}</style>
 			<input type="hidden" name="delivery_delivery_name" value="">
 			<input type="hidden" name="delivery_city_name" value="">
@@ -474,5 +333,21 @@ class Delivery_Checkout {
 		// Якщо не вдалося отримати значення з нової таблиці, використовуємо стару опцію
 		$settings = get_option('woocommerce_delivery_settings');
 		return isset($settings[$key]) ? $settings[$key] : $default;
+	}
+	
+	/**
+	 * Підключаємо скрипти та стилі для сторінки оформлення замовлення
+	 */
+	public function enqueue_scripts() {
+		// Перевіряємо, чи ми на сторінці оформлення замовлення
+		if ( is_checkout() ) {
+			// Підключаємо CSS файл для стилізації
+			wp_enqueue_style(
+				'ip-delivery-frontend',
+				plugins_url( 'assets/css/ip-delivery-frontend.css', DELIVERY_PLUGIN_FILE ),
+				array(),
+				filemtime( plugin_dir_path( DELIVERY_PLUGIN_FILE ) . 'assets/css/ip-delivery-frontend.css' )
+			);
+		}
 	}
 } 

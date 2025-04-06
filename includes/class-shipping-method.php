@@ -22,7 +22,7 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 	public function __construct() {
 		$this->id                 = 'delivery'; 
 		$this->method_title       = __( 'Delivery Service', 'ip-delivery-shipping' );  
-		$this->method_description = __( 'Delivery shipping method', 'ip-delivery-shipping' ); 
+		$this->method_description = ''; 
 
 		// Availability & Countries
 		$this->availability = 'including';
@@ -40,6 +40,9 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 						
 		$this->public_key = isset( $this->settings['public_key'] ) ? $this->settings['public_key'] : '';
 		$this->secret_key = isset( $this->settings['secret_key'] ) ? $this->settings['secret_key'] : '';
+		
+		// Підключення стилів для фронтенду
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_styles' ) );
 	}
 
 	/**
@@ -202,6 +205,13 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 	 */
 	public function init_form_fields() { 
 		$this->form_fields = array(
+			'general_settings_title' => array(
+				'title' => __( 'General Settings', 'ip-delivery-shipping' ),
+				'type' => 'title',
+				'description' => '',
+				'class' => 'delivery-settings-section'
+			),
+			
 			'enabled' => array(
 				'title' => __( 'Enable', 'ip-delivery-shipping' ),
 				'type' => 'checkbox',
@@ -219,12 +229,22 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 			'base_cost' => array(
 				'title' => __( 'Base Cost', 'ip-delivery-shipping' ),
 				'type' => 'number',
-				'description' => __( 'Base cost for delivery. Can be modified by filters.', 'ip-delivery-shipping' ),
+				'description' => __( 'Base cost for delivery. Can be modified by filters.', 'ip-delivery-shipping' ) . ' <br><a href="https://github.com/pekarskyi/ip-delivery-shipping" target="_blank">' . __( 'Learn more about filters', 'ip-delivery-shipping' ) . '</a>',
 				'default' => '0',
 				'custom_attributes' => array(
 					'min' => '0',
 					'step' => '0.01'
 				)
+			),
+			
+			'api_settings_title' => array(
+				'title' => __( 'API Settings', 'ip-delivery-shipping' ),
+				'type' => 'title',
+				'description' => sprintf(
+					__( 'To get API keys, please visit <a href="%s" target="_blank">Delivery API Key page</a>', 'ip-delivery-shipping' ),
+					esc_url( 'https://www.delivery-auto.com/uk/Account/ApiKey' )
+				),
+				'class' => 'delivery-settings-section'
 			),
 			 
 			'public_key' => array(
@@ -240,27 +260,34 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 				'description' => __( 'Secret key for Delivery API access', 'ip-delivery-shipping' ),
 				'default' => ''
 			),
-				  
-			'api_key_link' => array(
-				'title' => __( 'Get API Keys', 'ip-delivery-shipping' ),
+			
+			'checkout_options' => array(
+				'title' => __( 'Checkout Options', 'ip-delivery-shipping' ),
 				'type' => 'title',
-				'description' => sprintf(
-					__( 'To get API keys, please visit <a href="%s" target="_blank">Delivery API Key page</a>', 'ip-delivery-shipping' ),
-					esc_url( 'https://www.delivery-auto.com/uk/Account/ApiKey' )
-				),
+				'description' => '',
+				'class' => 'delivery-settings-section'
+			),
+			
+			'two_column_fields' => array(
+				'title' => __( 'Display Phone and Email fields in two columns', 'ip-delivery-shipping' ),
+				'type' => 'checkbox',
+				'description' => __( 'Field display may be affected by your theme or other plugins. Please check how these fields are displayed.', 'ip-delivery-shipping' ),
+				'default' => 'yes'
 			),
 			 
 			'cache_options' => array(
 				'title' => __( 'Cache Options', 'ip-delivery-shipping' ),
 				'type' => 'title',
 				'description' => __( 'The plugin caches API responses for better performance. Cache lifetime: 24 hours.', 'ip-delivery-shipping' ) . 
-				'&nbsp;&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=delivery&clear_cache=1&_wpnonce=' . wp_create_nonce( 'delivery_clear_cache' ) ) ) . '" class="button-secondary" id="delivery-clear-cache-link">' . esc_html__( 'Clear Cache', 'ip-delivery-shipping' ) . '</a>',
+				'&nbsp;&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=ip-delivery&clear_cache=1&_wpnonce=' . wp_create_nonce( 'delivery_clear_cache' ) ) ) . '" class="button red" id="delivery-clear-cache-link">' . esc_html__( 'Clear Cache', 'ip-delivery-shipping' ) . '</a>',
+				'class' => 'delivery-settings-section'
 			),
 			
 			'cleanup_options' => array(
 				'title' => __( 'Cleanup Options', 'ip-delivery-shipping' ),
 				'type' => 'title',
-				'description' => __( 'Settings for plugin data cleanup.', 'ip-delivery-shipping' ),
+				'description' => '',
+				'class' => 'delivery-settings-section'
 			),
 			
 			'delete_data' => array(
@@ -271,7 +298,7 @@ class Delivery_Shipping_Method extends WC_Shipping_Method {
 			),
 		);
 	}
-
+	
 	/**
 	 * This function is used to calculate the shipping cost. Within this function we can check for weights, dimensions and other parameters.
 	 *

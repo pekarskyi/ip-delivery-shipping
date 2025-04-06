@@ -1,0 +1,79 @@
+/* IP Delivery Frontend Styles */
+
+#delivery_checkout_field h3 {
+    word-break: normal !important;
+}
+
+/* Стилі для відображення пунктів доставки */
+.ip-delivery-locations {
+    margin-bottom: 20px;
+}
+
+.ip-delivery-location-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    transition: all 0.3s ease;
+}
+
+.ip-delivery-location-item:hover {
+    border-color: #b2b2b2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.ip-delivery-location-radio {
+    margin-right: 10px;
+}
+
+.ip-delivery-location-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.ip-delivery-location-address {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Стилі для форми вибору міста */
+.ip-delivery-city-select {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Повідомлення про помилки */
+.ip-delivery-error {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+}
+
+/* Повідомлення про успішну операцію */
+.ip-delivery-success {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    color: #155724;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+    .ip-delivery-location-item {
+        padding: 8px;
+    }
+
+    .ip-delivery-city-select {
+        max-width: 100%;
+    }
+}
