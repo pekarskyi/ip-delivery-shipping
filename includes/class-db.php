@@ -64,6 +64,7 @@ class Delivery_DB {
 
 		$charset_collate = $wpdb->get_charset_collate();
 
+		// Створення таблиці для даних доставки
 		$sql = "CREATE TABLE {$this->table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			order_id bigint(20) NOT NULL,
@@ -81,6 +82,56 @@ class Delivery_DB {
 
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
+
+		// Створення таблиці для налаштувань
+		$settings_table = $wpdb->prefix . 'ip_delivery_settings';
+		$sql_settings = "CREATE TABLE $settings_table (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			setting_key varchar(191) NOT NULL,
+			setting_value longtext NOT NULL,
+			PRIMARY KEY  (id),
+			UNIQUE KEY setting_key (setting_key)
+		) $charset_collate;";
+		
+		dbDelta( $sql_settings );
+		
+		// Додаємо значення за замовчуванням для таблиці налаштувань
+		$default_settings = array(
+			'enabled' => 'yes',
+			'title' => __( 'Delivery', 'ip-delivery-shipping' ),
+			'two_column_fields' => 'no',
+			'hide_country_field' => 'no',
+			'base_cost' => '0',
+			'delete_data' => 'no',
+			'public_key' => '',
+			'secret_key' => ''
+		);
+		
+		// Вставляємо значення за замовчуванням, тільки якщо записів ще немає
+		foreach ( $default_settings as $key => $value ) {
+			// Перевіряємо чи вже існує запис з таким ключем
+			$exists = $wpdb->get_var(
+				$wpdb->prepare( 
+					"SELECT COUNT(*) FROM $settings_table WHERE setting_key = %s", 
+					$key 
+				)
+			);
+			
+			// Якщо запису ще немає, вставляємо значення за замовчуванням
+			if ( $exists == 0 ) {
+				$wpdb->insert(
+					$settings_table,
+					array(
+						'setting_key' => $key,
+						'setting_value' => $value
+					),
+					array(
+						'%s',
+						'%s'
+					)
+				);
+			}
+		}
 
 		// Зберігаємо версію бази даних
 		update_option( 'delivery_db_version', $this->db_version );

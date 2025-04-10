@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Delivery for WooCommerce
  * Description: Ukrainian delivery service "Delivery" for WooCommerce
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: InwebPress
  * Plugin URI: https://github.com/pekarskyi/ip-delivery-shipping
  * Author URI: https://inwebpress.com
